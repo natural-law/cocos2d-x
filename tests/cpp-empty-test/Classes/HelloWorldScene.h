@@ -15,8 +15,25 @@ public:
     // a selector callback
     void menuCloseCallback(Ref* sender);
     
+    bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event  *event);
+    void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event  *event);
+    
     // implement the "static node()" method manually
     CREATE_FUNC(HelloWorld);
+    
+private:
+    cocos2d::Sprite* _player;
+    cocos2d::Sprite* _boss;
+    int _rowSize, _colSize;
+    float _boxsize;
+    cocos2d::Vec2 _origin;
+    
+    cocos2d::Vec2 _touchBegin;
+    cocos2d::Vec2 _touchEnded;
+    
+    cocos2d::Sprite* _baseMap;
+    
+    cocos2d::DrawNode* _grid;
 };
 
 #endif // __HELLOWORLD_SCENE_H__
