@@ -793,6 +793,9 @@
 		527B1F4119EFAD44000A1F82 /* Default-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 527B1F3F19EFAD44000A1F82 /* Default-736h@3x.png */; };
 		527B1F4419EFAE13000A1F82 /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 527B1F4219EFAE13000A1F82 /* Default-667h@2x.png */; };
 		527B1F4519EFAE13000A1F82 /* Default-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 527B1F4319EFAE13000A1F82 /* Default-736h@3x.png */; };
+		527D955F1A32F40C0065F2AB /* grossini.png in Resources */ = {isa = PBXBuildFile; fileRef = 527D955D1A32F3840065F2AB /* grossini.png */; };
+		527D95601A32F40C0065F2AB /* grossinis_sister1.png in Resources */ = {isa = PBXBuildFile; fileRef = 527D955E1A32F3840065F2AB /* grossinis_sister1.png */; };
+		527D95621A331F950065F2AB /* basemap.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 527D95611A331F6B0065F2AB /* basemap.jpg */; };
 		59620E8F1921E5CF002021B6 /* Bug-Child.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59620E8D1921E5CF002021B6 /* Bug-Child.cpp */; };
 		59620E901921E5CF002021B6 /* Bug-Child.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59620E8D1921E5CF002021B6 /* Bug-Child.cpp */; };
 		5EBEECB01995247000429821 /* DrawNode3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5EBEECAE1995247000429821 /* DrawNode3D.cpp */; };
@@ -1722,6 +1725,13 @@
 		527B1F3F19EFAD44000A1F82 /* Default-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-736h@3x.png"; sourceTree = "<group>"; };
 		527B1F4219EFAE13000A1F82 /* Default-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-667h@2x.png"; sourceTree = "<group>"; };
 		527B1F4319EFAE13000A1F82 /* Default-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-736h@3x.png"; sourceTree = "<group>"; };
+		527D95591A32CF470065F2AB /* DisplayMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DisplayMap.cpp; sourceTree = "<group>"; };
+		527D955A1A32CF480065F2AB /* DisplayMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayMap.h; sourceTree = "<group>"; };
+		527D955B1A32D3710065F2AB /* MapData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MapData.cpp; sourceTree = "<group>"; };
+		527D955C1A32D3710065F2AB /* MapData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapData.h; sourceTree = "<group>"; };
+		527D955D1A32F3840065F2AB /* grossini.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = grossini.png; path = "../tests/cpp-empty-test/Resources/grossini.png"; sourceTree = "<group>"; };
+		527D955E1A32F3840065F2AB /* grossinis_sister1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = grossinis_sister1.png; path = "../tests/cpp-empty-test/Resources/grossinis_sister1.png"; sourceTree = "<group>"; };
+		527D95611A331F6B0065F2AB /* basemap.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = basemap.jpg; path = "../tests/cpp-empty-test/Resources/basemap.jpg"; sourceTree = "<group>"; };
 		59620E8D1921E5CF002021B6 /* Bug-Child.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "Bug-Child.cpp"; sourceTree = "<group>"; };
 		59620E8E1921E5CF002021B6 /* Bug-Child.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bug-Child.h"; sourceTree = "<group>"; };
 		5EBEECAE1995247000429821 /* DrawNode3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DrawNode3D.cpp; path = Sprite3DTest/DrawNode3D.cpp; sourceTree = "<group>"; };
@@ -2072,6 +2082,10 @@
 		1AC358BA18CEC1BF00F37B72 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				527D955B1A32D3710065F2AB /* MapData.cpp */,
+				527D955C1A32D3710065F2AB /* MapData.h */,
+				527D95591A32CF470065F2AB /* DisplayMap.cpp */,
+				527D955A1A32CF480065F2AB /* DisplayMap.h */,
 				1AC358BB18CEC1BF00F37B72 /* AppDelegate.cpp */,
 				1AC358BC18CEC1BF00F37B72 /* AppDelegate.h */,
 				1AC358BD18CEC1BF00F37B72 /* AppMacros.h */,
@@ -2128,6 +2142,9 @@
 		1AC358FD18CEC1EF00F37B72 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				527D95611A331F6B0065F2AB /* basemap.jpg */,
+				527D955D1A32F3840065F2AB /* grossini.png */,
+				527D955E1A32F3840065F2AB /* grossinis_sister1.png */,
 				1AC358FE18CEC1FB00F37B72 /* bang.png */,
 				1AC358FF18CEC1FB00F37B72 /* fonts */,
 				1AC3590018CEC1FB00F37B72 /* ipad */,
@@ -4228,6 +4245,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				527D95621A331F950065F2AB /* basemap.jpg in Resources */,
+				527D955F1A32F40C0065F2AB /* grossini.png in Resources */,
+				527D95601A32F40C0065F2AB /* grossinis_sister1.png in Resources */,
 				1AC3590918CEC1FB00F37B72 /* ipadhd in Resources */,
 				1AC358F518CEC1D400F37B72 /* InfoPlist.strings in Resources */,
 				1AC3590318CEC1FB00F37B72 /* bang.png in Resources */,
