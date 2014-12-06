@@ -192,16 +192,6 @@
 		1AC358F618CEC1D400F37B72 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AC358EF18CEC1D400F37B72 /* MainMenu.xib */; };
 		1AC358F818CEC1D400F37B72 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 1AC358F318CEC1D400F37B72 /* Icon.icns */; };
 		1AC358F918CEC1D400F37B72 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AC358F418CEC1D400F37B72 /* main.cpp */; };
-		1AC3590318CEC1FB00F37B72 /* bang.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AC358FE18CEC1FB00F37B72 /* bang.png */; };
-		1AC3590418CEC1FB00F37B72 /* bang.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AC358FE18CEC1FB00F37B72 /* bang.png */; };
-		1AC3590518CEC1FB00F37B72 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 1AC358FF18CEC1FB00F37B72 /* fonts */; };
-		1AC3590618CEC1FB00F37B72 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 1AC358FF18CEC1FB00F37B72 /* fonts */; };
-		1AC3590718CEC1FB00F37B72 /* ipad in Resources */ = {isa = PBXBuildFile; fileRef = 1AC3590018CEC1FB00F37B72 /* ipad */; };
-		1AC3590818CEC1FB00F37B72 /* ipad in Resources */ = {isa = PBXBuildFile; fileRef = 1AC3590018CEC1FB00F37B72 /* ipad */; };
-		1AC3590918CEC1FB00F37B72 /* ipadhd in Resources */ = {isa = PBXBuildFile; fileRef = 1AC3590118CEC1FB00F37B72 /* ipadhd */; };
-		1AC3590A18CEC1FB00F37B72 /* ipadhd in Resources */ = {isa = PBXBuildFile; fileRef = 1AC3590118CEC1FB00F37B72 /* ipadhd */; };
-		1AC3590B18CEC1FB00F37B72 /* iphone in Resources */ = {isa = PBXBuildFile; fileRef = 1AC3590218CEC1FB00F37B72 /* iphone */; };
-		1AC3590C18CEC1FB00F37B72 /* iphone in Resources */ = {isa = PBXBuildFile; fileRef = 1AC3590218CEC1FB00F37B72 /* iphone */; };
 		1AC35B2118CECF0C00F37B72 /* ActionManagerTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AC3592918CECF0A00F37B72 /* ActionManagerTest.cpp */; };
 		1AC35B2218CECF0C00F37B72 /* ActionManagerTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AC3592918CECF0A00F37B72 /* ActionManagerTest.cpp */; };
 		1AC35B2318CECF0C00F37B72 /* ActionsEaseTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AC3592C18CECF0A00F37B72 /* ActionsEaseTest.cpp */; };
@@ -1135,11 +1125,6 @@
 		1AC358F018CEC1D400F37B72 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		1AC358F318CEC1D400F37B72 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
 		1AC358F418CEC1D400F37B72 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		1AC358FE18CEC1FB00F37B72 /* bang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bang.png; path = "../tests/cpp-empty-test/Resources/bang.png"; sourceTree = "<group>"; };
-		1AC358FF18CEC1FB00F37B72 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = "../tests/cpp-empty-test/Resources/fonts"; sourceTree = "<group>"; };
-		1AC3590018CEC1FB00F37B72 /* ipad */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ipad; path = "../tests/cpp-empty-test/Resources/ipad"; sourceTree = "<group>"; };
-		1AC3590118CEC1FB00F37B72 /* ipadhd */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ipadhd; path = "../tests/cpp-empty-test/Resources/ipadhd"; sourceTree = "<group>"; };
-		1AC3590218CEC1FB00F37B72 /* iphone */ = {isa = PBXFileReference; lastKnownFileType = folder; name = iphone; path = "../tests/cpp-empty-test/Resources/iphone"; sourceTree = "<group>"; };
 		1AC3590D18CEC25300F37B72 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1AC3590F18CEC26700F37B72 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1AC3592918CECF0A00F37B72 /* ActionManagerTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ActionManagerTest.cpp; sourceTree = "<group>"; };
@@ -2144,11 +2129,6 @@
 			children = (
 				FA03E79E1A32F1880045B436 /* block_road.jpg */,
 				FA03E79F1A32F1880045B436 /* block_wall.jpg */,
-				1AC358FE18CEC1FB00F37B72 /* bang.png */,
-				1AC358FF18CEC1FB00F37B72 /* fonts */,
-				1AC3590018CEC1FB00F37B72 /* ipad */,
-				1AC3590118CEC1FB00F37B72 /* ipadhd */,
-				1AC3590218CEC1FB00F37B72 /* iphone */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -4244,14 +4224,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1AC3590918CEC1FB00F37B72 /* ipadhd in Resources */,
 				FA03E7A01A32F1880045B436 /* block_road.jpg in Resources */,
 				1AC358F518CEC1D400F37B72 /* InfoPlist.strings in Resources */,
-				1AC3590318CEC1FB00F37B72 /* bang.png in Resources */,
-				1AC3590718CEC1FB00F37B72 /* ipad in Resources */,
-				1AC3590B18CEC1FB00F37B72 /* iphone in Resources */,
 				1AC358F818CEC1D400F37B72 /* Icon.icns in Resources */,
-				1AC3590518CEC1FB00F37B72 /* fonts in Resources */,
 				1AC358F618CEC1D400F37B72 /* MainMenu.xib in Resources */,
 				FA03E7A21A32F1880045B436 /* block_wall.jpg in Resources */,
 			);
@@ -4276,9 +4251,6 @@
 				1AC358E118CEC1CB00F37B72 /* Icon-120.png in Resources */,
 				1AC358DD18CEC1CB00F37B72 /* Default@2x.png in Resources */,
 				1AC358E018CEC1CB00F37B72 /* Icon-114.png in Resources */,
-				1AC3590418CEC1FB00F37B72 /* bang.png in Resources */,
-				1AC3590A18CEC1FB00F37B72 /* ipadhd in Resources */,
-				1AC3590C18CEC1FB00F37B72 /* iphone in Resources */,
 				1AC358E818CEC1CB00F37B72 /* Icon-76.png in Resources */,
 				1AC358E418CEC1CB00F37B72 /* Icon-40.png in Resources */,
 				1AC358E618CEC1CB00F37B72 /* Icon-58.png in Resources */,
@@ -4287,10 +4259,8 @@
 				1AC358DF18CEC1CB00F37B72 /* Icon-100.png in Resources */,
 				1AC358E218CEC1CB00F37B72 /* Icon-144.png in Resources */,
 				FA03E7A31A32F1880045B436 /* block_wall.jpg in Resources */,
-				1AC3590618CEC1FB00F37B72 /* fonts in Resources */,
 				1AC358E718CEC1CB00F37B72 /* Icon-72.png in Resources */,
 				1AC358E918CEC1CB00F37B72 /* Icon-80.png in Resources */,
-				1AC3590818CEC1FB00F37B72 /* ipad in Resources */,
 				FA03E7A11A32F1880045B436 /* block_road.jpg in Resources */,
 				1AC358E318CEC1CB00F37B72 /* Icon-152.png in Resources */,
 				1AC358E518CEC1CB00F37B72 /* Icon-57.png in Resources */,
