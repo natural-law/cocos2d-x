@@ -826,6 +826,14 @@
 		C08689C418D370C90093E810 /* background.caf in Resources */ = {isa = PBXBuildFile; fileRef = C08689C018D370C90093E810 /* background.caf */; };
 		D60AE43417F7FFE100757E4B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D60AE43317F7FFE100757E4B /* CoreMotion.framework */; };
 		EDCC747F17C455FD007B692C /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDCC747E17C455FD007B692C /* IOKit.framework */; };
+		FA03E7A01A32F1880045B436 /* block_road.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA03E79E1A32F1880045B436 /* block_road.jpg */; };
+		FA03E7A11A32F1880045B436 /* block_road.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA03E79E1A32F1880045B436 /* block_road.jpg */; };
+		FA03E7A21A32F1880045B436 /* block_wall.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA03E79F1A32F1880045B436 /* block_wall.jpg */; };
+		FA03E7A31A32F1880045B436 /* block_wall.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA03E79F1A32F1880045B436 /* block_wall.jpg */; };
+		FAC94BF41A32E92100A4AF00 /* MapLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAC94BF21A32E92100A4AF00 /* MapLayer.cpp */; };
+		FAC94BF51A32E92100A4AF00 /* MapLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAC94BF21A32E92100A4AF00 /* MapLayer.cpp */; };
+		FAC94BF61A32EA4C00A4AF00 /* MapLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAC94BF21A32E92100A4AF00 /* MapLayer.cpp */; };
+		FAC94BF91A32EB1900A4AF00 /* MapLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAC94BF21A32E92100A4AF00 /* MapLayer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1756,6 +1764,10 @@
 		C08689C018D370C90093E810 /* background.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = background.caf; path = "../tests/cpp-tests/Resources/background.caf"; sourceTree = "<group>"; };
 		D60AE43317F7FFE100757E4B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
 		EDCC747E17C455FD007B692C /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		FA03E79E1A32F1880045B436 /* block_road.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = block_road.jpg; path = "../tests/cpp-empty-test/Resources/block_road.jpg"; sourceTree = "<group>"; };
+		FA03E79F1A32F1880045B436 /* block_wall.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = block_wall.jpg; path = "../tests/cpp-empty-test/Resources/block_wall.jpg"; sourceTree = "<group>"; };
+		FAC94BF21A32E92100A4AF00 /* MapLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MapLayer.cpp; sourceTree = "<group>"; };
+		FAC94BF31A32E92100A4AF00 /* MapLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapLayer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2086,6 +2098,8 @@
 				527D955C1A32D3710065F2AB /* MapData.h */,
 				527D95591A32CF470065F2AB /* DisplayMap.cpp */,
 				527D955A1A32CF480065F2AB /* DisplayMap.h */,
+				FAC94BF21A32E92100A4AF00 /* MapLayer.cpp */,
+				FAC94BF31A32E92100A4AF00 /* MapLayer.h */,
 				1AC358BB18CEC1BF00F37B72 /* AppDelegate.cpp */,
 				1AC358BC18CEC1BF00F37B72 /* AppDelegate.h */,
 				1AC358BD18CEC1BF00F37B72 /* AppMacros.h */,
@@ -2145,6 +2159,8 @@
 				527D95611A331F6B0065F2AB /* basemap.jpg */,
 				527D955D1A32F3840065F2AB /* grossini.png */,
 				527D955E1A32F3840065F2AB /* grossinis_sister1.png */,
+				FA03E79E1A32F1880045B436 /* block_road.jpg */,
+				FA03E79F1A32F1880045B436 /* block_wall.jpg */,
 				1AC358FE18CEC1FB00F37B72 /* bang.png */,
 				1AC358FF18CEC1FB00F37B72 /* fonts */,
 				1AC3590018CEC1FB00F37B72 /* ipad */,
@@ -4249,6 +4265,7 @@
 				527D955F1A32F40C0065F2AB /* grossini.png in Resources */,
 				527D95601A32F40C0065F2AB /* grossinis_sister1.png in Resources */,
 				1AC3590918CEC1FB00F37B72 /* ipadhd in Resources */,
+				FA03E7A01A32F1880045B436 /* block_road.jpg in Resources */,
 				1AC358F518CEC1D400F37B72 /* InfoPlist.strings in Resources */,
 				1AC3590318CEC1FB00F37B72 /* bang.png in Resources */,
 				1AC3590718CEC1FB00F37B72 /* ipad in Resources */,
@@ -4256,6 +4273,7 @@
 				1AC358F818CEC1D400F37B72 /* Icon.icns in Resources */,
 				1AC3590518CEC1FB00F37B72 /* fonts in Resources */,
 				1AC358F618CEC1D400F37B72 /* MainMenu.xib in Resources */,
+				FA03E7A21A32F1880045B436 /* block_wall.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4288,10 +4306,12 @@
 				1AC358DB18CEC1CB00F37B72 /* Default-568h@2x.png in Resources */,
 				1AC358DF18CEC1CB00F37B72 /* Icon-100.png in Resources */,
 				1AC358E218CEC1CB00F37B72 /* Icon-144.png in Resources */,
+				FA03E7A31A32F1880045B436 /* block_wall.jpg in Resources */,
 				1AC3590618CEC1FB00F37B72 /* fonts in Resources */,
 				1AC358E718CEC1CB00F37B72 /* Icon-72.png in Resources */,
 				1AC358E918CEC1CB00F37B72 /* Icon-80.png in Resources */,
 				1AC3590818CEC1FB00F37B72 /* ipad in Resources */,
+				FA03E7A11A32F1880045B436 /* block_road.jpg in Resources */,
 				1AC358E318CEC1CB00F37B72 /* Icon-152.png in Resources */,
 				1AC358E518CEC1CB00F37B72 /* Icon-57.png in Resources */,
 				1AC358DC18CEC1CB00F37B72 /* Default.png in Resources */,
@@ -4663,6 +4683,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAC94BF61A32EA4C00A4AF00 /* MapLayer.cpp in Sources */,
 				1AC358C218CEC1BF00F37B72 /* HelloWorldScene.cpp in Sources */,
 				1AC358C018CEC1BF00F37B72 /* AppDelegate.cpp in Sources */,
 				1AC358F918CEC1D400F37B72 /* main.cpp in Sources */,
@@ -4674,6 +4695,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AC35D6018CEDE9E00F37B72 /* main.cpp in Sources */,
+				FAC94BF41A32E92100A4AF00 /* MapLayer.cpp in Sources */,
 				1AC35D3118CEDE8B00F37B72 /* AppDelegate.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4682,6 +4704,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAC94BF91A32EB1900A4AF00 /* MapLayer.cpp in Sources */,
 				1AC358DA18CEC1CB00F37B72 /* AppController.mm in Sources */,
 				1AC358EB18CEC1CB00F37B72 /* RootViewController.mm in Sources */,
 				1AC358C318CEC1BF00F37B72 /* HelloWorldScene.cpp in Sources */,
@@ -4697,6 +4720,7 @@
 				1AC35D5218CEDE9400F37B72 /* RootViewController.mm in Sources */,
 				1AC35D3218CEDE8B00F37B72 /* AppDelegate.cpp in Sources */,
 				1AC35D5118CEDE9400F37B72 /* main.m in Sources */,
+				FAC94BF51A32E92100A4AF00 /* MapLayer.cpp in Sources */,
 				1AC35D4518CEDE9400F37B72 /* AppController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
