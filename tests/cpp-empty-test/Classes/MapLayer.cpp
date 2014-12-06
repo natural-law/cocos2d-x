@@ -1,12 +1,12 @@
 #include "MapLayer.h"
 
-#define MAX_ROW_COUNT     10
-#define MAX_COLUMN_COUNT  10
-
-#define BLOCK_SIZE        40
-#define POS_INDEX_SIZE    2
-
-#define RANDOM_ROAD_PERCENT     25
+//#define MAX_ROW_COUNT     10
+//#define MAX_COLUMN_COUNT  10
+//
+//#define BLOCK_SIZE        50
+//#define POS_INDEX_SIZE    2
+//
+//#define RANDOM_ROAD_PERCENT     25
 
 static int road1[][POS_INDEX_SIZE] = {
     8, 0,
@@ -119,6 +119,9 @@ void MapData::generateRoad()
         BlockSprite* block = this->getBlockByIdx(pos);
         block->setType(BlockTypeRoad);
     }
+    
+    _playerPos = PosIndex(road1[0][0], road1[0][1]);
+    _bossPos = PosIndex(road1[roadStepCount-1][0], road1[roadStepCount-1][1]);
 }
 
 void MapData::randomRoad()
@@ -160,6 +163,16 @@ BlockSprite* MapData::getBlockByIdx(const PosIndex & pos)
     BlockSprite* block = col->at(pos.rowIdx);
     
     return block;
+}
+
+PosIndex& MapData::getPlayerPos()
+{
+    return _playerPos;
+}
+
+PosIndex& MapData::getBossPos()
+{
+    return _bossPos;
 }
 
 /////////////////////////////////
@@ -204,6 +217,11 @@ void MapLayer::showBlock(PosIndex pos)
 bool MapLayer::isRoadPos(PosIndex idx)
 {
     return _map->isRoadPos(idx);
+}
+
+MapData* MapLayer::getMapData()
+{
+    return _map;
 }
 
 MapLayer::~MapLayer()

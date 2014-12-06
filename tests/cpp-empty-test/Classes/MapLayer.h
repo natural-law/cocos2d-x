@@ -5,6 +5,14 @@
 #include "base/CCVector.h"
 #include <vector>
 
+#define MAX_ROW_COUNT     10
+#define MAX_COLUMN_COUNT  10
+
+#define BLOCK_SIZE        50
+#define POS_INDEX_SIZE    2
+
+#define RANDOM_ROAD_PERCENT     25
+
 typedef enum
 {
     BlockTypeNull = 0,
@@ -32,6 +40,8 @@ struct PosIndex
     int rowIdx;
     int columnIdx;
     
+    PosIndex():rowIdx(0), columnIdx(0) {}
+    
     PosIndex(int row, int column)
     {
         rowIdx = row;
@@ -47,12 +57,18 @@ public:
     
     BlockSprite* getBlockByIdx(const PosIndex & pos);
     bool isRoadPos(PosIndex idx);
+    
+    PosIndex& getPlayerPos();
+    PosIndex& getBossPos();
 
 private:
     void generateRoad();
     void randomRoad();
 
     std::vector<ColumnData*> _data;
+    
+    PosIndex _playerPos;
+    PosIndex _bossPos;
 };
 
 class MapLayer : public cocos2d::LayerColor
@@ -64,6 +80,8 @@ public:
     void hideAllBlocks();
     void showBlock(PosIndex pos);
     bool isRoadPos(PosIndex idx);
+    
+    MapData* getMapData();
 
 private:
     MapData* _map;

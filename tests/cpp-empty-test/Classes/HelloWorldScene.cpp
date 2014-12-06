@@ -2,7 +2,6 @@
 #include "DisplayMap.h"
 #include "AppMacros.h"
 #include "math.h"
-#include "MapLayer.h"
 
 USING_NS_CC;
 
@@ -35,45 +34,15 @@ bool HelloWorld::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     auto origin = Director::getInstance()->getVisibleOrigin();
     
-    CCLOG("visiblesize: %f, %f", visibleSize.width, visibleSize.height);
-    CCLOG("originsize: %f, %f", origin.x, origin.y);
+    _baseMap = cocos2d::Sprite::create("basemap.jpg");
+    auto baseMapSize = _baseMap->getContentSize();
     
-
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
-
-    // add a "close" icon to exit the progress. it's an autorelease object
-    auto closeItem = MenuItemImage::create(
-                                        "CloseNormal.png",
-                                        "CloseSelected.png",
-                                        CC_CALLBACK_1(HelloWorld::menuCloseCallback,this));
+    _baseMap->setScale(0.5 , 0.5);
     
-    closeItem->setPosition(origin + Vec2(visibleSize) - Vec2(closeItem->getContentSize() / 2));
-
-    // create menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, nullptr);
-    menu->setPosition(Vec2::ZERO);
-    this->addChild(menu, 1);
+    _baseMap->setPosition(Vec2(visibleSize / 2) + origin);
+    addChild(_baseMap, -2);
     
-    /////////////////////////////
-    // 3. add your codes below...
-
-    // add a label shows "Hello World"
-    // create and initialize a label
     
-    auto label = LabelTTF::create("Hello World", "Arial", TITLE_FONT_SIZE);
-    
-    // position the label on the center of the screen
-    label->setPosition(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height - label->getContentSize().height);
-
-    // add the label as a child to this layer
-    this->addChild(label, 1);
-
-    // add "HelloWorld" splash screen"
-    //auto sprite = Sprite::create("HelloWorld.png");
-
     // position the sprite on the center of the screen
     //sprite->setPosition(Vec2(visibleSize / 2) + origin);
 
@@ -90,30 +59,30 @@ bool HelloWorld::init()
     listener->onTouchEnded = CC_CALLBACK_2(HelloWorld::onTouchEnded, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
-    _rowSize = 10;
-    _colSize = 10;
-    _boxsize = 30;
-    _origin = cocos2d::Vec2(80, 10);
+    _mapLayer = new MapLayer();//MapLayer::create();
+    addChild(_mapLayer, -1);
+
+    _rowSize = MAX_ROW_COUNT;
+    _colSize = MAX_COLUMN_COUNT;
+    _boxsize = BLOCK_SIZE;
+    _origin = origin + cocos2d::Vec2((visibleSize.width - _colSize * _boxsize)/2, visibleSize.height - _rowSize * _boxsize - 30);
+    _mapLayer->setPosition(_origin);
+    
     _player = Sprite::create("grossini.png");
-    _player->setAnchorPoint(cocos2d::Vec2(1, 0));
+    _player->setAnchorPoint(cocos2d::Vec2(0, 0));
     auto playerSize = _player->getContentSize();
     _player->setScale(_boxsize/playerSize.width, _boxsize/playerSize.height);
-    _player->setPosition(_origin+Vec2(_boxsize, 0));
+    _playerPosIndex = _mapLayer->getMapData()->getPlayerPos();
+    _playerPosition = _origin + Vec2(_playerPosIndex.columnIdx * _boxsize, _playerPosIndex.rowIdx * _boxsize);
+    _player->setPosition(_playerPosition);
+    addChild(_player);
+    
     _boss = Sprite::create("grossinis_sister1.png");
-    _boss->setAnchorPoint(cocos2d::Vec2(1, 0));
-    _boss->setPosition(_origin+Vec2(_colSize*_boxsize, (_rowSize-1)*_boxsize));
+    _boss->setAnchorPoint(cocos2d::Vec2(0, 0));
     auto bossSize = _boss->getContentSize();
     _boss->setScale(_boxsize/bossSize.width, _boxsize/bossSize.height);
-    
-    _baseMap = cocos2d::Sprite::create("basemap.jpg");
-    auto baseMapSize = _baseMap->getContentSize();
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
-    _baseMap->setScale(0.5 , 0.5);
-#endif
-    _baseMap->setPosition(Vec2(visibleSize / 2) + origin);
-    addChild(_baseMap);
-    
-    addChild(_player);
+    auto bossPos = _mapLayer->getMapData()->getBossPos();
+    _boss->setPosition(_origin+Vec2(bossPos.columnIdx * _boxsize, bossPos.rowIdx * _boxsize));
     addChild(_boss);
     
     auto color = Color4F::GREEN;
@@ -128,12 +97,11 @@ bool HelloWorld::init()
         _grid->drawLine(_origin+Vec2(0 + j * _boxsize, 0), _origin+Vec2(0 + j * _boxsize, _rowSize*_boxsize), color);
     }
     
-    addChild(_grid);
+    addChild(_grid, 20);
     
-    auto maplayer = new MapLayer();//MapLayer::create();
-    addChild(maplayer, 10);
-    maplayer->setPosition(_origin);
-    
+    _mapLayer->hideAllBlocks();
+    _mapLayer->showBlock(_playerPosIndex);
+    _mapLayer->showBlock(bossPos);
     
     return true;
 }
@@ -144,56 +112,62 @@ bool HelloWorld::onTouchBegan(Touch* touch, Event  *event)
     return true;
 }
 
-//transform Touch position to fit box
-/*cocos2d::Vec2& transformTouchLocation(cocos2d::Vec2& location)
+/*void transformPosition(Vec2& origin, float boxsize, Vec2& from, PosIndex& to)
 {
-    return location;
+    Vec2 diff = from - origin;
+    to.rowIdx = diff.y/boxsize;
+    to.columnIdx = diff.x/boxsize;
 }*/
 
 void HelloWorld::onTouchEnded(Touch* touch, Event  *event)
 {
     _touchEnded = touch->getLocation();
     
-    /*if((fabs(location.x - _player->getPosition().x) <= _boxsize*5) && (fabs(location.y - _player->getPosition().y) <= _boxsize*5))
+    Vec2 newPosition(_playerPosition);
+    PosIndex newPosIndex(_playerPosIndex.rowIdx, _playerPosIndex.columnIdx);
+    if((_touchEnded.x - _touchBegin.x > 50) && (fabs(_touchEnded.y - _touchBegin.y) < 40))
     {
-        if(1 == 1)
-        {
-            _player->setPosition(location);
-        }
-        else
-        {
-            
-        }
-    }*/
-    auto position = _player->getPosition();
-    if((_touchEnded.x - _touchBegin.x > 30) && (fabs(_touchEnded.y - _touchBegin.y) < 25))
-    {
-        _player->setPosition(position + Vec2(_boxsize, 0));
+        //_player->setPosition(position + Vec2(_boxsize, 0));
+        newPosition = _playerPosition + Vec2(_boxsize, 0);
+        newPosIndex.rowIdx = _playerPosIndex.rowIdx;
+        newPosIndex.columnIdx = _playerPosIndex.columnIdx + 1;
     }
-    else if((_touchEnded.y - _touchBegin.y > 30) && (fabs(_touchEnded.x - _touchBegin.x) < 25))
+    else if((_touchEnded.y - _touchBegin.y > 50) && (fabs(_touchEnded.x - _touchBegin.x) < 40))
     {
-        _player->setPosition(position + Vec2(0, _boxsize));
+        //_player->setPosition(position + Vec2(0, _boxsize));
+        newPosition = _playerPosition + Vec2(0, _boxsize);
+        newPosIndex.rowIdx = _playerPosIndex.rowIdx + 1;
+        newPosIndex.columnIdx = _playerPosIndex.columnIdx;
     }
-    else if((_touchBegin.y - _touchEnded.y > 30) && (fabs(_touchBegin.x - _touchEnded.x) < 25))
+    else if((_touchBegin.y - _touchEnded.y > 50) && (fabs(_touchBegin.x - _touchEnded.x) < 40))
     {
-        _player->setPosition(position + Vec2(0, -_boxsize));
-    }
-    else if((_touchBegin.x - _touchEnded.x > 30) && (fabs(_touchBegin.y - _touchEnded.y) < 25))
-    {
-        _player->setPosition(position + Vec2(-_boxsize, 0));
-    }
-}
+        //_player->setPosition(position + Vec2(0, -_boxsize));
+        newPosition = _playerPosition + Vec2(0, -_boxsize);
+        newPosIndex.rowIdx = _playerPosIndex.rowIdx - 1;
+        newPosIndex.columnIdx = _playerPosIndex.columnIdx;
 
-void HelloWorld::menuCloseCallback(Ref* sender)
-{
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
-	MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
-    return;
-#endif
+    }
+    else if((_touchBegin.x - _touchEnded.x > 50) && (fabs(_touchBegin.y - _touchEnded.y) < 40))
+    {
+        //_player->setPosition(position + Vec2(-_boxsize, 0));
+        newPosition = _playerPosition + Vec2(-_boxsize, 0);
+        newPosIndex.rowIdx = _playerPosIndex.rowIdx;
+        newPosIndex.columnIdx = _playerPosIndex.columnIdx - 1;
 
-    Director::getInstance()->end();
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    exit(0);
-#endif
+    }
+    
+    //PosIndex newPosIndex;
+    //transformPosition(_origin, _boxsize, newPosition, newPosIndex);
+    
+    if(newPosIndex.rowIdx < 0 || newPosIndex.columnIdx < 0 || newPosIndex.rowIdx >= _rowSize || newPosIndex.columnIdx >= _colSize)
+    {
+    }
+    else if(_mapLayer->isRoadPos(newPosIndex))
+    {
+        _mapLayer->showBlock(newPosIndex);
+        _playerPosition = newPosition;
+        _playerPosIndex.columnIdx = newPosIndex.columnIdx;
+        _playerPosIndex.rowIdx = newPosIndex.rowIdx;
+        _player->setPosition(newPosition);
+    }
 }
