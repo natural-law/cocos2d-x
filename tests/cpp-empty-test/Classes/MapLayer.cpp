@@ -183,6 +183,29 @@ MapLayer::MapLayer()
     }
 }
 
+void MapLayer::hideAllBlocks()
+{
+    for (int i = 0; i < MAX_ROW_COUNT; i++)
+    {
+        for (int j = 0; j < MAX_COLUMN_COUNT; j++)
+        {
+            BlockSprite* block = _map->getBlockByIdx(PosIndex(i, j));
+            block->setVisible(false);
+        }
+    }
+}
+
+void MapLayer::showBlock(PosIndex pos)
+{
+    auto block = _map->getBlockByIdx(pos);
+    block->setVisible(true);
+}
+
+bool MapLayer::isRoadPos(PosIndex idx)
+{
+    return _map->isRoadPos(idx);
+}
+
 MapLayer::~MapLayer()
 {
     CC_SAFE_DELETE(_map);

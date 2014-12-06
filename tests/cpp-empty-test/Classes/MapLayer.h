@@ -46,11 +46,11 @@ public:
     virtual ~MapData();
     
     BlockSprite* getBlockByIdx(const PosIndex & pos);
-    
+    bool isRoadPos(PosIndex idx);
+
 private:
     void generateRoad();
     void randomRoad();
-    bool isRoadPos(PosIndex idx);
 
     std::vector<ColumnData*> _data;
 };
@@ -60,6 +60,10 @@ class MapLayer : public cocos2d::LayerColor
 public:
     MapLayer();
     virtual ~MapLayer();
+
+    void hideAllBlocks();
+    void showBlock(PosIndex pos);
+    bool isRoadPos(PosIndex idx);
 
 private:
     MapData* _map;
