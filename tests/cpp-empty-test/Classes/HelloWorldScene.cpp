@@ -2,6 +2,7 @@
 #include "DisplayMap.h"
 #include "AppMacros.h"
 #include "math.h"
+#include "MapLayer.h"
 
 USING_NS_CC;
 
@@ -128,6 +129,11 @@ bool HelloWorld::init()
     }
     
     addChild(_grid);
+    
+    auto maplayer = new MapLayer();//MapLayer::create();
+    addChild(maplayer, 10);
+    maplayer->setPosition(_origin);
+    
     
     return true;
 }
