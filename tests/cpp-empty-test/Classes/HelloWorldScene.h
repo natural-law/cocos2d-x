@@ -2,6 +2,7 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
+#include "MapLayer.h"
 
 class HelloWorld : public cocos2d::Layer
 {
@@ -12,9 +13,6 @@ public:
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
     static cocos2d::Scene* scene();
     
-    // a selector callback
-    void menuCloseCallback(Ref* sender);
-    
     bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event  *event);
     void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event  *event);
     
@@ -22,7 +20,10 @@ public:
     CREATE_FUNC(HelloWorld);
     
 private:
+    MapLayer* _mapLayer;
     cocos2d::Sprite* _player;
+    PosIndex _playerPosIndex;
+    cocos2d::Vec2 _playerPosition;
     cocos2d::Sprite* _boss;
     int _rowSize, _colSize;
     float _boxsize;
