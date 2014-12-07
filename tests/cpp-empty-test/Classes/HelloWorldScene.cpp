@@ -200,7 +200,7 @@ void HelloWorld::updatePlayerPos(cocos2d::Vec2 newPosition, PosIndex newPosIndex
     }
     else if(_mapLayer->isRoadPos(newPosIndex))
     {
-        _mapLayer->showBlock(newPosIndex);
+        _mapLayer->showBlock(newPosIndex, true);
         _playerPosition = newPosition;
         _playerPosIndex.columnIdx = newPosIndex.columnIdx;
         _playerPosIndex.rowIdx = newPosIndex.rowIdx;
