@@ -1758,6 +1758,7 @@
 		FA03E79F1A32F1880045B436 /* block_wall.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = block_wall.jpg; path = "../tests/cpp-empty-test/Resources/block_wall.jpg"; sourceTree = "<group>"; };
 		FA03E7B41A3408DF0045B436 /* RestartLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RestartLayer.cpp; sourceTree = "<group>"; };
 		FA03E7B51A3408DF0045B436 /* RestartLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestartLayer.h; sourceTree = "<group>"; };
+		FA03E7BA1A342A660045B436 /* Roads.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Roads.h; sourceTree = "<group>"; };
 		FAC94BF21A32E92100A4AF00 /* MapLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MapLayer.cpp; sourceTree = "<group>"; };
 		FAC94BF31A32E92100A4AF00 /* MapLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapLayer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -2086,6 +2087,7 @@
 		1AC358BA18CEC1BF00F37B72 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				FA03E7BA1A342A660045B436 /* Roads.h */,
 				FA03E7B41A3408DF0045B436 /* RestartLayer.cpp */,
 				FA03E7B51A3408DF0045B436 /* RestartLayer.h */,
 				4615D9BB1A33EED6009BE187 /* MyMenu.cpp */,
