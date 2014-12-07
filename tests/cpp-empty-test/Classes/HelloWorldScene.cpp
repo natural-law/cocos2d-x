@@ -75,10 +75,13 @@ bool HelloWorld::init()
 
 void HelloWorld::cleanMapLayer()
 {
+    log("1");
     if (_mapLayer) {
         _mapLayer->removeFromParentAndCleanup(true);
         _mapLayer = nullptr;
     }
+    
+    log("2");
     
     if (_player) {
         _player->removeFromParentAndCleanup(true);

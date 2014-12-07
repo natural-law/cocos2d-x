@@ -63,7 +63,8 @@ void RestartLayer::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event  *event)
 void RestartLayer::onRetry(Ref* sender)
 {
     CCLOG("retry clicked");
-    this->removeFromParentAndCleanup(true);
+//    this->removeFromParentAndCleanup(true);
+    this->runAction(RemoveSelf::create());
     _parent->cleanMapLayer();
     _parent->resetMapLayer();
 }
