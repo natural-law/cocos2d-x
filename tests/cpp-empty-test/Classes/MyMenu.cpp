@@ -33,7 +33,10 @@ void MyMenu::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
     }
     else
     {
-        label->setVisible(true);
+        char str[20];
+        sprintf(str, "%f s", (float)diff / 1000);
+        label->setString(str);
+        label->runAction(Sequence::create(Show::create(), DelayTime::create(2), Hide::create(), nullptr));
     }
 }
 
@@ -61,14 +64,10 @@ MyMenu* MyMenu::createMenu(const std::string &title, const cocos2d::Vec2& pos)
 
 MyMenu::MyMenu()
 {
-    label = Label::createWithSystemFont("less or longer than 2 seconds", "system", 20);
+    label = Label::createWithSystemFont("", "system", 20);
     label->setPosition(Vec2(500, 50));
     label->retain();
     label->setVisible(false);
-    
-    auto function = [this](float dt) { this->label->setVisible(false); };
-    //schedule(const ccSchedulerFunc& callback, void *target, float interval, bool paused, const std::string& key);
-    Director::getInstance()->getScheduler()->schedule(function, this, 5, false, "show label");
     
     _duration = 0;
 }
