@@ -23,6 +23,8 @@ public:
     virtual void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) override;
     virtual bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event) override;
     
+    void showAroundPlayer(int column, int row);
+    
     int _duration;
     
     cocos2d::Label *label;
