@@ -17,7 +17,8 @@ public:
     void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
     bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event  *event);
     void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event  *event);
-    
+
+    void countDown();
     void hideMapLayer();
     
     void playerGoUp();
@@ -46,6 +47,9 @@ private:
     cocos2d::Sprite* _baseMap;
     
     cocos2d::DrawNode* _grid;
+    
+    int _time;
+    bool touchEnable;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

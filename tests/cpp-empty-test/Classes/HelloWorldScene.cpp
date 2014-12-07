@@ -30,10 +30,12 @@ bool HelloWorld::init()
     {
         return false;
     }
-    
+ 
     auto visibleSize = Director::getInstance()->getVisibleSize();
     auto visibleOrigin = Director::getInstance()->getVisibleOrigin();
     auto origin = Director::getInstance()->getVisibleOrigin();
+    
+    auto s = Director::getInstance()->getWinSize();
     
     _baseMap = cocos2d::Sprite::create("basemap.jpg");
     auto baseMapSize = _baseMap->getContentSize();
@@ -104,18 +106,48 @@ bool HelloWorld::init()
     
     addChild(_grid, 20);
     
-    runAction( Sequence::create(
-                                /*CallFunc::create( CC_CALLBACK_0(HelloWorld::countDown,this)),*/
-                                DelayTime::create(5.0f),
-                                CallFunc::create( CC_CALLBACK_0(HelloWorld::hideMapLayer,this)),
-                                nullptr)
-              );
+//    runAction( Sequence::create(
+//                                /*CallFunc::create( CC_CALLBACK_0(HelloWorld::countDown,this)),*/
+//                                DelayTime::create(5.0f),
+//                                CallFunc::create( CC_CALLBACK_0(HelloWorld::hideMapLayer,this)),
+//                                nullptr)
+//              );
+    //auto label1 = Label::createWithBMFont("bitmapFontTest2.fnt", "5");
+    auto label1 = LabelTTF::create("Power by cocos2d-x", "arial.ttf", 70);
+    label1->setAnchorPoint( Vec2(0.5,0.5) );
+    label1->setPosition(Vec2(s.width/2, s.height/2));
+    addChild(label1, 0, 1);
+    auto fade = FadeOut::create(1.0f);
+    auto fade_in = fade->reverse();
+    auto seq = Sequence::create(fade, fade_in, nullptr);
+    auto repeat = RepeatForever::create(seq);
+    label1->runAction(repeat);
+    _time = 5;
+    schedule(CC_CALLBACK_0(HelloWorld::countDown, this), 1, 5, 1, " ");
+    
     
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC || CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
     registeKeyEvent();
 #endif
 
     return true;
+}
+
+void HelloWorld::countDown()
+{
+    char string[5] = {0};
+    sprintf(string, "%d", _time);
+    
+    auto label1 = (LabelTTF*) getChildByTag(1);
+    label1->setString(string);
+    
+    if(_time == 0)
+    {
+        removeChild(label1);
+        hideMapLayer();
+    }
+    
+    _time = _time - 1;
 }
 
 void HelloWorld::hideMapLayer()
