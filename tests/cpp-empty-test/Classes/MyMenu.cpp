@@ -34,7 +34,7 @@ void MyMenu::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
     else
     {
         char str[20];
-        sprintf(str, "%f s", (float)diff / 1000);
+        sprintf(str, "%.2f s", (float)diff / 1000);
         label->setString(str);
         label->runAction(Sequence::create(Show::create(), DelayTime::create(2), Hide::create(), nullptr));
     }
