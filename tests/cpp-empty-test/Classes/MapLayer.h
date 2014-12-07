@@ -9,7 +9,6 @@
 #define MAX_COLUMN_COUNT  10
 
 #define BLOCK_SIZE        50
-#define POS_INDEX_SIZE    2
 
 #define RANDOM_ROAD_PERCENT     25
 

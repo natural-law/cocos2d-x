@@ -1,4 +1,5 @@
 #include "MapLayer.h"
+#include "Roads.h"
 
 //#define MAX_ROW_COUNT     10
 //#define MAX_COLUMN_COUNT  10
@@ -7,37 +8,6 @@
 //#define POS_INDEX_SIZE    2
 //
 //#define RANDOM_ROAD_PERCENT     25
-
-static int road1[][POS_INDEX_SIZE] = {
-    8, 0,
-    8, 1,
-    9, 1,
-    9, 2,
-    9, 3,
-    8, 3,
-    7, 3,
-    7, 2,
-    6, 2,
-    5, 2,
-    5, 3,
-    5, 4,
-    6, 4,
-    6, 5,
-    6, 6,
-    5, 6,
-    4, 6,
-    3, 6,
-    3, 5,
-    2, 5,
-    1, 5,
-    1, 6,
-    1, 7,
-    1, 8,
-    2, 8,
-    3, 8,
-    4, 8,
-    4, 9
-};
 
 using namespace cocos2d;
 
@@ -111,18 +81,37 @@ MapData::~MapData()
 
 void MapData::generateRoad()
 {
-    int roadStepCount = sizeof(road1) / POS_INDEX_SIZE / sizeof(int);
+    int randValue = RandomHelper::random_int(0, 3);
+    std::vector<PosIndex> selectRoad;
+    switch (randValue) {
+        case 0:
+            selectRoad = road1;
+            break;
+        case 1:
+            selectRoad = road2;
+            break;
+        case 2:
+            selectRoad = road3;
+            break;
+        case 3:
+            selectRoad = road4;
+            break;
+        default:
+            break;
+    }
+    
+    int roadStepCount = selectRoad.size();
     for (int i = 0; i < roadStepCount; i++)
     {
-        int rowIdx = road1[i][0];
-        int columnIdx = road1[i][1];
+        int rowIdx = selectRoad.at(i).rowIdx;
+        int columnIdx = selectRoad.at(i).columnIdx;
         PosIndex pos(rowIdx, columnIdx);
         BlockSprite* block = this->getBlockByIdx(pos);
         block->setType(BlockTypeRoad);
     }
     
-    _beginPos = PosIndex(road1[0][0], road1[0][1]);
-    _endPos = PosIndex(road1[roadStepCount-1][0], road1[roadStepCount-1][1]);
+    _beginPos = selectRoad.at(0);
+    _endPos = selectRoad.at(roadStepCount - 1);
 }
 
 void MapData::randomRoad()
