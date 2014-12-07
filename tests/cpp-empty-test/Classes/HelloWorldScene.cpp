@@ -237,7 +237,7 @@ bool HelloWorld::onTouchBegan(Touch* touch, Event  *event)
     {
         _touchBegin = touch->getLocation();
     }
-    return false;
+    return true;
 }
 
 /*void transformPosition(Vec2& origin, float boxsize, Vec2& from, PosIndex& to)
@@ -251,28 +251,39 @@ void HelloWorld::onTouchEnded(Touch* touch, Event  *event)
 {
     if(_cantouch)
     {
+        log("touch end");
         _touchEnded = touch->getLocation();
         
+        bool hSide = false;
+        bool vSide = false;
+        float hDis = fabs(_touchEnded.x - _touchBegin.x);
+        float vDis = fabs(_touchEnded.y - _touchBegin.y);
         
-        if((_touchEnded.x - _touchBegin.x > 50) && (fabs(_touchEnded.y - _touchBegin.y) < 40))
+        if (hDis < 40 && vDis < 40)
+            return;
+        
+        if (hDis >= vDis)
+            hSide = true;
+        else
+            vSide = true;
+        
+        if (hSide)
         {
             // right
-            playerGoRight();
+            if (_touchEnded.x >= _touchBegin.x)
+                playerGoRight();
+            else
+                playerGoLeft();
+                
         }
-        else if((_touchEnded.y - _touchBegin.y > 50) && (fabs(_touchEnded.x - _touchBegin.x) < 40))
+        
+        if (vSide)
         {
-            // up
-            playerGoUp();
-        }
-        else if((_touchBegin.y - _touchEnded.y > 50) && (fabs(_touchBegin.x - _touchEnded.x) < 40))
-        {
-            // down
-            playerGoDown();
-        }
-        else if((_touchBegin.x - _touchEnded.x > 50) && (fabs(_touchBegin.y - _touchEnded.y) < 40))
-        {
-            // left
-            playerGoLeft();
+            // right
+            if (_touchEnded.y >= _touchBegin.y)
+                playerGoUp();
+            else
+                playerGoDown();
         }
     }
 }
