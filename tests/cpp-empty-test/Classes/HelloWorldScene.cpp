@@ -33,7 +33,6 @@ bool HelloWorld::init()
  
     auto visibleSize = Director::getInstance()->getVisibleSize();
     auto visibleOrigin = Director::getInstance()->getVisibleOrigin();
-    auto origin = Director::getInstance()->getVisibleOrigin();
     
     auto s = Director::getInstance()->getWinSize();
     
@@ -44,37 +43,25 @@ bool HelloWorld::init()
     
     _baseMap->setScale(0.5 , 0.5);
     
-    _baseMap->setPosition(Vec2(visibleSize / 2) + origin);
+    _baseMap->setPosition(Vec2(visibleSize / 2) + visibleOrigin);
     addChild(_baseMap, -2);
     
     auto timeMenu = MyMenu::createMenu("press me 2 seconds", Vec2(visibleOrigin.x + 200, 50));
     addChild(timeMenu);
     addChild(timeMenu->label);
     
-    
-    // position the sprite on the center of the screen
-    //sprite->setPosition(Vec2(visibleSize / 2) + origin);
-
-    // add the sprite as a child to this layer
-    //this->addChild(sprite);
-    //auto mapData = MapData::generate(Vec2(640, 960));
-    //cocos2d::Layer* map = cocos2d::Layer::create();
-    //auto displayMap = new DisplayMap(map);
-    
-    //addChild(displayMap->getMap());
-    
     auto listener = EventListenerTouchOneByOne::create();
     listener->onTouchBegan = CC_CALLBACK_2(HelloWorld::onTouchBegan, this);
     listener->onTouchEnded = CC_CALLBACK_2(HelloWorld::onTouchEnded, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
-    _mapLayer = new MapLayer();//MapLayer::create();
+    _mapLayer = new MapLayer();
     addChild(_mapLayer, -1);
 
     _rowSize = MAX_ROW_COUNT;
     _colSize = MAX_COLUMN_COUNT;
     _boxsize = BLOCK_SIZE;
-    _origin = origin + cocos2d::Vec2((visibleSize.width - _colSize * _boxsize)/2, visibleSize.height - _rowSize * _boxsize - 30);
+    _origin = visibleOrigin + cocos2d::Vec2((visibleSize.width - _colSize * _boxsize)/2, visibleSize.height - _rowSize * _boxsize - 30);
     _mapLayer->setPosition(_origin);
     
     _player = Sprite::create("grossini.png");
@@ -108,17 +95,11 @@ bool HelloWorld::init()
     
     addChild(_grid, 20);
     
-//    runAction( Sequence::create(
-//                                /*CallFunc::create( CC_CALLBACK_0(HelloWorld::countDown,this)),*/
-//                                DelayTime::create(5.0f),
-//                                CallFunc::create( CC_CALLBACK_0(HelloWorld::hideMapLayer,this)),
-//                                nullptr)
-//              );
-    //auto label1 = Label::createWithBMFont("bitmapFontTest2.fnt", "5");
     auto label1 = LabelTTF::create("Power by cocos2d-x", "arial.ttf", 70);
     label1->setAnchorPoint( Vec2(0.5,0.5) );
     label1->setPosition(Vec2(s.width/2, s.height/2));
     addChild(label1, 0, 1);
+    label1->setColor(Color3B::RED);
     auto fade = FadeOut::create(1.0f);
     auto fade_in = fade->reverse();
     auto seq = Sequence::create(fade, fade_in, nullptr);
