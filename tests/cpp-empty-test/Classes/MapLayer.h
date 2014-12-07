@@ -30,8 +30,12 @@ public:
     void setType(BlockType type);
     inline BlockType getType() { return _type; }
 
+    inline void setShownForever(bool showForever) { _bShownForever = showForever; }
+    inline bool isShownForever() { return _bShownForever; }
+
 private:
     BlockType _type;
+    bool _bShownForever;
 };
 
 typedef cocos2d::Vector<BlockSprite*> ColumnData;
@@ -78,7 +82,7 @@ public:
     virtual ~MapLayer();
 
     void hideAllBlocks();
-    void showBlock(PosIndex pos);
+    void showBlock(PosIndex pos, bool bShowForever = false);
     bool isRoadPos(PosIndex idx);
     
     MapData* getMapData();

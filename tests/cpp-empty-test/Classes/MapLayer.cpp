@@ -47,6 +47,7 @@ using namespace cocos2d;
 //
 /////////////////////////////////
 BlockSprite::BlockSprite(BlockType type)
+: _bShownForever(false)
 {
     Sprite::init();
     this->setType(type);
@@ -211,12 +212,14 @@ void MapLayer::hideAllBlocks()
         for (int j = 0; j < MAX_COLUMN_COUNT; j++)
         {
             BlockSprite* block = _map->getBlockByIdx(PosIndex(i, j));
-            block->setVisible(false);
+            if (!block->isShownForever()) {
+                block->runAction(FadeOut::create(1.0f));
+            }
         }
     }
 }
 
-void MapLayer::showBlock(PosIndex pos)
+void MapLayer::showBlock(PosIndex pos, bool bShowForever)
 {
     auto block = _map->getBlockByIdx(pos);
     if (block == nullptr)
@@ -225,6 +228,11 @@ void MapLayer::showBlock(PosIndex pos)
     }
 
     block->setVisible(true);
+    block->setOpacity(255);
+    if (bShowForever)
+    {
+        block->setShownForever(bShowForever);
+    }
 }
 
 bool MapLayer::isRoadPos(PosIndex idx)
