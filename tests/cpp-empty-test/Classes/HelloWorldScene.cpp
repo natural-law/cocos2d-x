@@ -37,6 +37,8 @@ bool HelloWorld::init()
     
     auto s = Director::getInstance()->getWinSize();
     
+    _cantouch = false;
+    
     _baseMap = cocos2d::Sprite::create("basemap.jpg");
     auto baseMapSize = _baseMap->getContentSize();
     
@@ -127,12 +129,6 @@ bool HelloWorld::init()
     
     _mapLayer->showBlock(_playerPosIndex, true);
     _mapLayer->showBlock(_bossPosIndex, true);
-    runAction( Sequence::create(
-                                /*CallFunc::create( CC_CALLBACK_0(HelloWorld::countDown,this)),*/
-                                DelayTime::create(5.0f),
-                                CallFunc::create( CC_CALLBACK_0(HelloWorld::hideMapLayer,this)),
-                                nullptr)
-              );
     
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC || CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
     registeKeyEvent();
@@ -153,6 +149,7 @@ void HelloWorld::countDown()
     {
         removeChild(label1);
         hideMapLayer();
+        _cantouch = true;
     }
     
     _time = _time - 1;
@@ -172,22 +169,25 @@ void HelloWorld::registeKeyEvent()
 
 void HelloWorld::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 {
-    switch(keyCode)
+    if(_cantouch)
     {
-        case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
-            playerGoLeft();
-            break;
-        case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
-            playerGoRight();
-            break;
-        case EventKeyboard::KeyCode::KEY_UP_ARROW:
-            playerGoUp();
-            break;
-        case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
-            playerGoDown();
-            break;
-        default:
-            break;
+        switch(keyCode)
+        {
+            case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
+                playerGoLeft();
+                break;
+            case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
+                playerGoRight();
+                break;
+            case EventKeyboard::KeyCode::KEY_UP_ARROW:
+                playerGoUp();
+                break;
+            case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
+                playerGoDown();
+                break;
+            default:
+                break;
+        }
     }
 }
 
@@ -248,7 +248,10 @@ void HelloWorld::updatePlayerPos(cocos2d::Vec2 newPosition, PosIndex newPosIndex
 
 bool HelloWorld::onTouchBegan(Touch* touch, Event  *event)
 {
-    _touchBegin = touch->getLocation();
+    if(_cantouch)
+    {
+        _touchBegin = touch->getLocation();
+    }
     return false;
 }
 
@@ -261,27 +264,30 @@ bool HelloWorld::onTouchBegan(Touch* touch, Event  *event)
 
 void HelloWorld::onTouchEnded(Touch* touch, Event  *event)
 {
-    _touchEnded = touch->getLocation();
-    
-    
-    if((_touchEnded.x - _touchBegin.x > 50) && (fabs(_touchEnded.y - _touchBegin.y) < 40))
+    if(_cantouch)
     {
-        // right
-        playerGoRight();
-    }
-    else if((_touchEnded.y - _touchBegin.y > 50) && (fabs(_touchEnded.x - _touchBegin.x) < 40))
-    {
-        // up
-        playerGoUp();
-    }
-    else if((_touchBegin.y - _touchEnded.y > 50) && (fabs(_touchBegin.x - _touchEnded.x) < 40))
-    {
-        // down
-        playerGoDown();
-    }
-    else if((_touchBegin.x - _touchEnded.x > 50) && (fabs(_touchBegin.y - _touchEnded.y) < 40))
-    {
-        // left
-        playerGoLeft();
+        _touchEnded = touch->getLocation();
+        
+        
+        if((_touchEnded.x - _touchBegin.x > 50) && (fabs(_touchEnded.y - _touchBegin.y) < 40))
+        {
+            // right
+            playerGoRight();
+        }
+        else if((_touchEnded.y - _touchBegin.y > 50) && (fabs(_touchEnded.x - _touchBegin.x) < 40))
+        {
+            // up
+            playerGoUp();
+        }
+        else if((_touchBegin.y - _touchEnded.y > 50) && (fabs(_touchBegin.x - _touchEnded.x) < 40))
+        {
+            // down
+            playerGoDown();
+        }
+        else if((_touchBegin.x - _touchEnded.x > 50) && (fabs(_touchBegin.y - _touchEnded.y) < 40))
+        {
+            // left
+            playerGoLeft();
+        }
     }
 }

@@ -49,7 +49,7 @@ public:
     cocos2d::DrawNode* _grid;
     
     int _time;
-    bool touchEnable;
+    bool _cantouch;
 };
 
 #endif // __HELLOWORLD_SCENE_H__
