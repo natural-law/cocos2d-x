@@ -24,6 +24,11 @@ THE SOFTWARE.
 package org.cocos2dx.cpp_empty_test;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
+import org.cocos2dx.lib.Cocos2dxVideoHelper;
+
+import android.util.Log;
+import android.view.KeyEvent;
 
 public class AppActivity extends Cocos2dxActivity {
+
 }
