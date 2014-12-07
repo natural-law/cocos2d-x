@@ -1,4 +1,5 @@
 #include "RestartLayer.h"
+#include "HelloWorldScene.h"
 
 using namespace cocos2d;
 
@@ -6,6 +7,7 @@ RestartLayer::RestartLayer()
 : _tipMsg("")
 , _tipLabel(nullptr)
 , _itemRestart(nullptr)
+, _parent(nullptr)
 {
     
 }
@@ -43,6 +45,11 @@ void RestartLayer::setTipLabel(const std::string & tipMsg)
     }
 }
 
+void RestartLayer::setMainScene(HelloWorld* parent)
+{
+    _parent = parent;
+}
+
 bool RestartLayer::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event  *event)
 {
     return true;
@@ -57,4 +64,6 @@ void RestartLayer::onRetry(Ref* sender)
 {
     CCLOG("retry clicked");
     this->removeFromParentAndCleanup(true);
+    _parent->cleanMapLayer();
+    _parent->resetMapLayer();
 }

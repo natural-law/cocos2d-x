@@ -13,6 +13,9 @@ public:
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
     static cocos2d::Scene* scene();
     
+    void cleanMapLayer();
+    void resetMapLayer();
+    
     void registeKeyEvent();
     void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
     bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event  *event);
