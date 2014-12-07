@@ -144,7 +144,7 @@ void HelloWorld::resetMapLayer()
     
     addChild(_grid, 20);
     
-    auto label1 = LabelTTF::create("5", "arial.ttf", 70);
+    auto label1 =  Label::createWithSystemFont("5", "no",100);
     label1->setAnchorPoint( Vec2(0.5,0.5) );
     label1->setPosition(Vec2(visibleOrigin.x + visibleSize.width/2, visibleOrigin.y + visibleSize.height/2));
     addChild(label1, 50, 1);
@@ -163,7 +163,7 @@ void HelloWorld::resetMapLayer()
 
 void HelloWorld::countDown()
 {
-    auto label1 = (LabelTTF*) getChildByTag(1);
+    auto label1 = (Label*) getChildByTag(1);
     
     char string[5] = {0};
     sprintf(string, "%d", _time);
