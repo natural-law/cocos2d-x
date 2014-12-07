@@ -2,6 +2,7 @@
 #include "AppMacros.h"
 #include "math.h"
 #include "MyMenu.h"
+#include "RestartLayer.h"
 
 USING_NS_CC;
 
@@ -34,10 +35,9 @@ bool HelloWorld::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     auto visibleOrigin = Director::getInstance()->getVisibleOrigin();
     
-    auto s = Director::getInstance()->getWinSize();
-    
     _cantouch = false;
     
+    // background
     _baseMap = cocos2d::Sprite::create("basemap.jpg");
     auto baseMapSize = _baseMap->getContentSize();
     
@@ -46,18 +46,62 @@ bool HelloWorld::init()
     _baseMap->setPosition(Vec2(visibleSize / 2) + visibleOrigin);
     addChild(_baseMap, -2);
     
+    // menu
     auto timeMenu = MyMenu::createMenu("press me 2 seconds", Vec2(visibleOrigin.x + 200, 50));
     addChild(timeMenu);
     addChild(timeMenu->label);
     
+    // register listener
     auto listener = EventListenerTouchOneByOne::create();
     listener->onTouchBegan = CC_CALLBACK_2(HelloWorld::onTouchBegan, this);
     listener->onTouchEnded = CC_CALLBACK_2(HelloWorld::onTouchEnded, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC || CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+    registeKeyEvent();
+#endif
+
+    // reset Map
+    resetMapLayer();
+
+    auto powerBy = Label::createWithSystemFont("Powered By Cocos2d-x", "no", 15);
+    powerBy->setPosition(Vec2(visibleOrigin.x + 100, visibleOrigin.y + visibleSize.height - 50));
+    addChild(powerBy);
+
+    return true;
+}
+
+void HelloWorld::cleanMapLayer()
+{
+    if (_mapLayer) {
+        _mapLayer->removeFromParentAndCleanup(true);
+        _mapLayer = nullptr;
+    }
+    
+    if (_player) {
+        _player->removeFromParentAndCleanup(true);
+        _player = nullptr;
+    }
+    
+    if (_boss) {
+        _boss->removeFromParentAndCleanup(true);
+        _boss = nullptr;
+    }
+    
+    if (_grid) {
+        _grid->removeFromParentAndCleanup(true);
+        _grid = nullptr;
+    }
+}
+
+void HelloWorld::resetMapLayer()
+{
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+    auto visibleOrigin = Director::getInstance()->getVisibleOrigin();
+
     _mapLayer = new MapLayer();
     addChild(_mapLayer, -1);
-
+    
     _rowSize = MAX_ROW_COUNT;
     _colSize = MAX_COLUMN_COUNT;
     _boxsize = BLOCK_SIZE;
@@ -97,7 +141,7 @@ bool HelloWorld::init()
     
     auto label1 = LabelTTF::create("Power by cocos2d-x", "arial.ttf", 70);
     label1->setAnchorPoint( Vec2(0.5,0.5) );
-    label1->setPosition(Vec2(s.width/2, s.height/2));
+    label1->setPosition(Vec2(visibleOrigin.x + visibleSize.width/2, visibleOrigin.y + visibleSize.height/2));
     addChild(label1, 0, 1);
     label1->setColor(Color3B::RED);
     auto fade = FadeOut::create(1.0f);
@@ -110,16 +154,6 @@ bool HelloWorld::init()
     
     _mapLayer->showBlock(_playerPosIndex, true);
     _mapLayer->showBlock(_bossPosIndex, true);
-    
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC || CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-    registeKeyEvent();
-#endif
-    
-    auto powerBy = Label::createWithSystemFont("Powered By Cocos2d-x", "no", 15);
-    powerBy->setPosition(Vec2(visibleOrigin.x + 100, visibleOrigin.y + visibleSize.height - 50));
-    addChild(powerBy);
-
-    return true;
 }
 
 void HelloWorld::countDown()
@@ -228,6 +262,14 @@ void HelloWorld::updatePlayerPos(cocos2d::Vec2 newPosition, PosIndex newPosIndex
         _playerPosIndex.columnIdx = newPosIndex.columnIdx;
         _playerPosIndex.rowIdx = newPosIndex.rowIdx;
         _player->setPosition(newPosition);
+    }
+    else
+    {
+        auto l = RestartLayer::create();
+        l->setMainScene(this);
+        l->setTipLabel("You are outside the road. Game Over!");
+        addChild(l, 1000);
+        _cantouch = false;
     }
 }
 
