@@ -213,7 +213,7 @@ void MapLayer::hideAllBlocks()
         {
             BlockSprite* block = _map->getBlockByIdx(PosIndex(i, j));
             if (!block->isShownForever()) {
-                block->setVisible(false);
+                block->runAction(FadeOut::create(1.0f));
             }
         }
     }
@@ -228,7 +228,10 @@ void MapLayer::showBlock(PosIndex pos, bool bShowForever)
     }
 
     block->setVisible(true);
-    block->setShownForever(bShowForever);
+    if (bShowForever)
+    {
+        block->setShownForever(bShowForever);
+    }
 }
 
 bool MapLayer::isRoadPos(PosIndex idx)
