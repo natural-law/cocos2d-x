@@ -86,8 +86,8 @@ bool HelloWorld::init()
     _boss->setAnchorPoint(cocos2d::Vec2(0, 0));
     auto bossSize = _boss->getContentSize();
     _boss->setScale(_boxsize/bossSize.width, _boxsize/bossSize.height);
-    auto bossPos = _mapLayer->getMapData()->getBossPos();
-    _boss->setPosition(_origin+Vec2(bossPos.columnIdx * _boxsize, bossPos.rowIdx * _boxsize));
+    _bossPosIndex = _mapLayer->getMapData()->getBossPos();
+    _boss->setPosition(_origin+Vec2(_bossPosIndex.columnIdx * _boxsize, _bossPosIndex.rowIdx * _boxsize));
     addChild(_boss);
     
     auto color = Color4F::GREEN;
@@ -104,15 +104,25 @@ bool HelloWorld::init()
     
     addChild(_grid, 20);
     
-    _mapLayer->hideAllBlocks();
-    _mapLayer->showBlock(_playerPosIndex);
-    _mapLayer->showBlock(bossPos);
+    runAction( Sequence::create(
+                                /*CallFunc::create( CC_CALLBACK_0(HelloWorld::countDown,this)),*/
+                                DelayTime::create(5.0f),
+                                CallFunc::create( CC_CALLBACK_0(HelloWorld::hideMapLayer,this)),
+                                nullptr)
+              );
     
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC || CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
     registeKeyEvent();
 #endif
 
     return true;
+}
+
+void HelloWorld::hideMapLayer()
+{
+    _mapLayer->hideAllBlocks();
+    _mapLayer->showBlock(_playerPosIndex);
+    _mapLayer->showBlock(_bossPosIndex);
 }
 
 void HelloWorld::registeKeyEvent()
