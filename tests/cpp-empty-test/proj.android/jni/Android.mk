@@ -10,7 +10,8 @@ LOCAL_SRC_FILES := main.cpp \
                    ../../Classes/AppDelegate.cpp \
                    ../../Classes/HelloWorldScene.cpp \
                    ../../Classes/MapLayer.cpp \
-                   ../../Classes/MyMenu.cpp
+                   ../../Classes/MyMenu.cpp \
+                   ../../Classes/RestartLayer.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes \
                     $(LOCAL_PATH)/../../../../extensions \
