@@ -1721,10 +1721,6 @@
 		527B1F3F19EFAD44000A1F82 /* Default-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-736h@3x.png"; sourceTree = "<group>"; };
 		527B1F4219EFAE13000A1F82 /* Default-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-667h@2x.png"; sourceTree = "<group>"; };
 		527B1F4319EFAE13000A1F82 /* Default-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-736h@3x.png"; sourceTree = "<group>"; };
-		527D95591A32CF470065F2AB /* DisplayMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DisplayMap.cpp; sourceTree = "<group>"; };
-		527D955A1A32CF480065F2AB /* DisplayMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayMap.h; sourceTree = "<group>"; };
-		527D955B1A32D3710065F2AB /* MapData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MapData.cpp; sourceTree = "<group>"; };
-		527D955C1A32D3710065F2AB /* MapData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapData.h; sourceTree = "<group>"; };
 		527D955D1A32F3840065F2AB /* grossini.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = grossini.png; path = "../tests/cpp-empty-test/Resources/grossini.png"; sourceTree = "<group>"; };
 		527D955E1A32F3840065F2AB /* grossinis_sister1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = grossinis_sister1.png; path = "../tests/cpp-empty-test/Resources/grossinis_sister1.png"; sourceTree = "<group>"; };
 		527D95611A331F6B0065F2AB /* basemap.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = basemap.jpg; path = "../tests/cpp-empty-test/Resources/basemap.jpg"; sourceTree = "<group>"; };
@@ -2083,10 +2079,6 @@
 			isa = PBXGroup;
 			children = (
 				4615D9BB1A33EED6009BE187 /* MyMenu.cpp */,
-				527D955B1A32D3710065F2AB /* MapData.cpp */,
-				527D955C1A32D3710065F2AB /* MapData.h */,
-				527D95591A32CF470065F2AB /* DisplayMap.cpp */,
-				527D955A1A32CF480065F2AB /* DisplayMap.h */,
 				FAC94BF21A32E92100A4AF00 /* MapLayer.cpp */,
 				FAC94BF31A32E92100A4AF00 /* MapLayer.h */,
 				1AC358BB18CEC1BF00F37B72 /* AppDelegate.cpp */,

@@ -1,5 +1,4 @@
 #include "HelloWorldScene.h"
-#include "DisplayMap.h"
 #include "AppMacros.h"
 #include "math.h"
 #include "MyMenu.h"
@@ -109,9 +108,94 @@ bool HelloWorld::init()
     _mapLayer->showBlock(_playerPosIndex);
     _mapLayer->showBlock(bossPos);
     
-    
-    
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC || CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+    registeKeyEvent();
+#endif
+
     return true;
+}
+
+void HelloWorld::registeKeyEvent()
+{
+    auto listener = EventListenerKeyboard::create();
+    listener->onKeyReleased = CC_CALLBACK_2(HelloWorld::onKeyReleased, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+}
+
+void HelloWorld::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
+{
+    switch(keyCode)
+    {
+        case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
+            playerGoLeft();
+            break;
+        case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
+            playerGoRight();
+            break;
+        case EventKeyboard::KeyCode::KEY_UP_ARROW:
+            playerGoUp();
+            break;
+        case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
+            playerGoDown();
+            break;
+        default:
+            break;
+    }
+}
+
+void HelloWorld::playerGoUp()
+{
+    Vec2 newPosition(_playerPosition);
+    PosIndex newPosIndex(_playerPosIndex.rowIdx, _playerPosIndex.columnIdx);
+    newPosition = _playerPosition + Vec2(0, _boxsize);
+    newPosIndex.rowIdx = _playerPosIndex.rowIdx + 1;
+    newPosIndex.columnIdx = _playerPosIndex.columnIdx;
+    updatePlayerPos(newPosition, newPosIndex);
+}
+
+void HelloWorld::playerGoDown()
+{
+    Vec2 newPosition(_playerPosition);
+    PosIndex newPosIndex(_playerPosIndex.rowIdx, _playerPosIndex.columnIdx);
+    newPosition = _playerPosition + Vec2(0, -_boxsize);
+    newPosIndex.rowIdx = _playerPosIndex.rowIdx - 1;
+    newPosIndex.columnIdx = _playerPosIndex.columnIdx;
+    updatePlayerPos(newPosition, newPosIndex);
+}
+
+void HelloWorld::playerGoLeft()
+{
+    Vec2 newPosition(_playerPosition);
+    PosIndex newPosIndex(_playerPosIndex.rowIdx, _playerPosIndex.columnIdx);
+    newPosition = _playerPosition + Vec2(-_boxsize, 0);
+    newPosIndex.rowIdx = _playerPosIndex.rowIdx;
+    newPosIndex.columnIdx = _playerPosIndex.columnIdx - 1;
+    updatePlayerPos(newPosition, newPosIndex);
+}
+
+void HelloWorld::playerGoRight()
+{
+    Vec2 newPosition(_playerPosition);
+    PosIndex newPosIndex(_playerPosIndex.rowIdx, _playerPosIndex.columnIdx);
+    newPosition = _playerPosition + Vec2(_boxsize, 0);
+    newPosIndex.rowIdx = _playerPosIndex.rowIdx;
+    newPosIndex.columnIdx = _playerPosIndex.columnIdx + 1;
+    updatePlayerPos(newPosition, newPosIndex);
+}
+
+void HelloWorld::updatePlayerPos(cocos2d::Vec2 newPosition, PosIndex newPosIndex)
+{
+    if(newPosIndex.rowIdx < 0 || newPosIndex.columnIdx < 0 || newPosIndex.rowIdx >= _rowSize || newPosIndex.columnIdx >= _colSize)
+    {
+    }
+    else if(_mapLayer->isRoadPos(newPosIndex))
+    {
+        _mapLayer->showBlock(newPosIndex);
+        _playerPosition = newPosition;
+        _playerPosIndex.columnIdx = newPosIndex.columnIdx;
+        _playerPosIndex.rowIdx = newPosIndex.rowIdx;
+        _player->setPosition(newPosition);
+    }
 }
 
 bool HelloWorld::onTouchBegan(Touch* touch, Event  *event)
@@ -131,51 +215,25 @@ void HelloWorld::onTouchEnded(Touch* touch, Event  *event)
 {
     _touchEnded = touch->getLocation();
     
-    Vec2 newPosition(_playerPosition);
-    PosIndex newPosIndex(_playerPosIndex.rowIdx, _playerPosIndex.columnIdx);
+    
     if((_touchEnded.x - _touchBegin.x > 50) && (fabs(_touchEnded.y - _touchBegin.y) < 40))
     {
-        //_player->setPosition(position + Vec2(_boxsize, 0));
-        newPosition = _playerPosition + Vec2(_boxsize, 0);
-        newPosIndex.rowIdx = _playerPosIndex.rowIdx;
-        newPosIndex.columnIdx = _playerPosIndex.columnIdx + 1;
+        // right
+        playerGoRight();
     }
     else if((_touchEnded.y - _touchBegin.y > 50) && (fabs(_touchEnded.x - _touchBegin.x) < 40))
     {
-        //_player->setPosition(position + Vec2(0, _boxsize));
-        newPosition = _playerPosition + Vec2(0, _boxsize);
-        newPosIndex.rowIdx = _playerPosIndex.rowIdx + 1;
-        newPosIndex.columnIdx = _playerPosIndex.columnIdx;
+        // up
+        playerGoUp();
     }
     else if((_touchBegin.y - _touchEnded.y > 50) && (fabs(_touchBegin.x - _touchEnded.x) < 40))
     {
-        //_player->setPosition(position + Vec2(0, -_boxsize));
-        newPosition = _playerPosition + Vec2(0, -_boxsize);
-        newPosIndex.rowIdx = _playerPosIndex.rowIdx - 1;
-        newPosIndex.columnIdx = _playerPosIndex.columnIdx;
-
+        // down
+        playerGoDown();
     }
     else if((_touchBegin.x - _touchEnded.x > 50) && (fabs(_touchBegin.y - _touchEnded.y) < 40))
     {
-        //_player->setPosition(position + Vec2(-_boxsize, 0));
-        newPosition = _playerPosition + Vec2(-_boxsize, 0);
-        newPosIndex.rowIdx = _playerPosIndex.rowIdx;
-        newPosIndex.columnIdx = _playerPosIndex.columnIdx - 1;
-
-    }
-    
-    //PosIndex newPosIndex;
-    //transformPosition(_origin, _boxsize, newPosition, newPosIndex);
-    
-    if(newPosIndex.rowIdx < 0 || newPosIndex.columnIdx < 0 || newPosIndex.rowIdx >= _rowSize || newPosIndex.columnIdx >= _colSize)
-    {
-    }
-    else if(_mapLayer->isRoadPos(newPosIndex))
-    {
-        _mapLayer->showBlock(newPosIndex);
-        _playerPosition = newPosition;
-        _playerPosIndex.columnIdx = newPosIndex.columnIdx;
-        _playerPosIndex.rowIdx = newPosIndex.rowIdx;
-        _player->setPosition(newPosition);
+        // left
+        playerGoLeft();
     }
 }
