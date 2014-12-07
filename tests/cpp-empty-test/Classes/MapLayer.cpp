@@ -65,7 +65,7 @@ void BlockSprite::setType(BlockType type)
         case BlockTypeNull:
             break;
         case BlockTypeRoad:
-            this->setTexture("block_road.jpg");
+            this->setTexture("block_road.png");
             break;
         case BlockTypeWall:
             this->setTexture("block_wall.jpg");
