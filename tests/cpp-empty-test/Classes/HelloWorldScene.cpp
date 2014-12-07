@@ -125,6 +125,14 @@ bool HelloWorld::init()
     _time = 5;
     schedule(CC_CALLBACK_0(HelloWorld::countDown, this), 1, 5, 1, " ");
     
+    _mapLayer->showBlock(_playerPosIndex, true);
+    _mapLayer->showBlock(_bossPosIndex, true);
+    runAction( Sequence::create(
+                                /*CallFunc::create( CC_CALLBACK_0(HelloWorld::countDown,this)),*/
+                                DelayTime::create(5.0f),
+                                CallFunc::create( CC_CALLBACK_0(HelloWorld::hideMapLayer,this)),
+                                nullptr)
+              );
     
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC || CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
     registeKeyEvent();
@@ -153,8 +161,6 @@ void HelloWorld::countDown()
 void HelloWorld::hideMapLayer()
 {
     _mapLayer->hideAllBlocks();
-    _mapLayer->showBlock(_playerPosIndex);
-    _mapLayer->showBlock(_bossPosIndex);
 }
 
 void HelloWorld::registeKeyEvent()
@@ -232,7 +238,7 @@ void HelloWorld::updatePlayerPos(cocos2d::Vec2 newPosition, PosIndex newPosIndex
     }
     else if(_mapLayer->isRoadPos(newPosIndex))
     {
-        _mapLayer->showBlock(newPosIndex);
+        _mapLayer->showBlock(newPosIndex, true);
         _playerPosition = newPosition;
         _playerPosIndex.columnIdx = newPosIndex.columnIdx;
         _playerPosIndex.rowIdx = newPosIndex.rowIdx;

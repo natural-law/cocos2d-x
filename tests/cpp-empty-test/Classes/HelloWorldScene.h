@@ -30,7 +30,7 @@ public:
     // implement the "static node()" method manually
     CREATE_FUNC(HelloWorld);
     
-private:
+public:
     MapLayer* _mapLayer;
     cocos2d::Sprite* _player;
     PosIndex _playerPosIndex;
