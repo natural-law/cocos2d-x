@@ -114,6 +114,10 @@ bool HelloWorld::init()
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC || CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
     registeKeyEvent();
 #endif
+    
+    auto powerBy = Label::createWithSystemFont("Powered By Cocos2d-x", "no", 15);
+    powerBy->setPosition(Vec2(visibleOrigin.x + 100, visibleOrigin.y + visibleSize.height - 50));
+    addChild(powerBy);
 
     return true;
 }
