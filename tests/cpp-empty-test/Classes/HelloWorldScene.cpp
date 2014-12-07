@@ -262,6 +262,15 @@ void HelloWorld::updatePlayerPos(cocos2d::Vec2 newPosition, PosIndex newPosIndex
         _playerPosIndex.columnIdx = newPosIndex.columnIdx;
         _playerPosIndex.rowIdx = newPosIndex.rowIdx;
         _player->setPosition(newPosition);
+
+        auto endPos = _mapLayer->getMapData()->getEndPos();
+        if (newPosIndex.rowIdx == endPos.rowIdx && newPosIndex.columnIdx == endPos.columnIdx) {
+            auto l = RestartLayer::create();
+            l->setMainScene(this);
+            l->setTipLabel("Congratulations!");
+            addChild(l, 1000);
+            _cantouch = false;
+        }
     }
     else
     {
