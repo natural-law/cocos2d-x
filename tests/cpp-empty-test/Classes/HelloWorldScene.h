@@ -13,8 +13,16 @@ public:
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
     static cocos2d::Scene* scene();
     
+    void registeKeyEvent();
+    void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
     bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event  *event);
     void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event  *event);
+    
+    void playerGoUp();
+    void playerGoDown();
+    void playerGoLeft();
+    void playerGoRight();
+    void updatePlayerPos(cocos2d::Vec2 newPosition, PosIndex newPosIndex);
     
     // implement the "static node()" method manually
     CREATE_FUNC(HelloWorld);
