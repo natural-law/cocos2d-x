@@ -18,6 +18,8 @@ public:
     bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event  *event);
     void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event  *event);
     
+    void hideMapLayer();
+    
     void playerGoUp();
     void playerGoDown();
     void playerGoLeft();
@@ -33,6 +35,7 @@ public:
     PosIndex _playerPosIndex;
     cocos2d::Vec2 _playerPosition;
     cocos2d::Sprite* _boss;
+    PosIndex _bossPosIndex;
     int _rowSize, _colSize;
     float _boxsize;
     cocos2d::Vec2 _origin;
