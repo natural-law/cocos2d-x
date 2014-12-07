@@ -30,47 +30,38 @@ bool HelloWorld::init()
     {
         return false;
     }
-    
+ 
     auto visibleSize = Director::getInstance()->getVisibleSize();
     auto visibleOrigin = Director::getInstance()->getVisibleOrigin();
-    auto origin = Director::getInstance()->getVisibleOrigin();
+    
+    auto s = Director::getInstance()->getWinSize();
+    
+    _cantouch = false;
     
     _baseMap = cocos2d::Sprite::create("basemap.jpg");
     auto baseMapSize = _baseMap->getContentSize();
     
     _baseMap->setScale(0.5 , 0.5);
     
-    _baseMap->setPosition(Vec2(visibleSize / 2) + origin);
+    _baseMap->setPosition(Vec2(visibleSize / 2) + visibleOrigin);
     addChild(_baseMap, -2);
     
     auto timeMenu = MyMenu::createMenu("press me 2 seconds", Vec2(visibleOrigin.x + 200, 50));
     addChild(timeMenu);
     addChild(timeMenu->label);
     
-    
-    // position the sprite on the center of the screen
-    //sprite->setPosition(Vec2(visibleSize / 2) + origin);
-
-    // add the sprite as a child to this layer
-    //this->addChild(sprite);
-    //auto mapData = MapData::generate(Vec2(640, 960));
-    //cocos2d::Layer* map = cocos2d::Layer::create();
-    //auto displayMap = new DisplayMap(map);
-    
-    //addChild(displayMap->getMap());
-    
     auto listener = EventListenerTouchOneByOne::create();
     listener->onTouchBegan = CC_CALLBACK_2(HelloWorld::onTouchBegan, this);
     listener->onTouchEnded = CC_CALLBACK_2(HelloWorld::onTouchEnded, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
-    _mapLayer = new MapLayer();//MapLayer::create();
+    _mapLayer = new MapLayer();
     addChild(_mapLayer, -1);
 
     _rowSize = MAX_ROW_COUNT;
     _colSize = MAX_COLUMN_COUNT;
     _boxsize = BLOCK_SIZE;
-    _origin = origin + cocos2d::Vec2((visibleSize.width - _colSize * _boxsize)/2, visibleSize.height - _rowSize * _boxsize - 30);
+    _origin = visibleOrigin + cocos2d::Vec2((visibleSize.width - _colSize * _boxsize)/2, visibleSize.height - _rowSize * _boxsize - 30);
     _mapLayer->setPosition(_origin);
     
     _player = Sprite::create("grossini.png");
@@ -104,20 +95,45 @@ bool HelloWorld::init()
     
     addChild(_grid, 20);
     
+    auto label1 = LabelTTF::create("Power by cocos2d-x", "arial.ttf", 70);
+    label1->setAnchorPoint( Vec2(0.5,0.5) );
+    label1->setPosition(Vec2(s.width/2, s.height/2));
+    addChild(label1, 0, 1);
+    label1->setColor(Color3B::RED);
+    auto fade = FadeOut::create(1.0f);
+    auto fade_in = fade->reverse();
+    auto seq = Sequence::create(fade, fade_in, nullptr);
+    auto repeat = RepeatForever::create(seq);
+    label1->runAction(repeat);
+    _time = 5;
+    schedule(CC_CALLBACK_0(HelloWorld::countDown, this), 1, 5, 1, " ");
+    
     _mapLayer->showBlock(_playerPosIndex, true);
     _mapLayer->showBlock(_bossPosIndex, true);
-    runAction( Sequence::create(
-                                /*CallFunc::create( CC_CALLBACK_0(HelloWorld::countDown,this)),*/
-                                DelayTime::create(5.0f),
-                                CallFunc::create( CC_CALLBACK_0(HelloWorld::hideMapLayer,this)),
-                                nullptr)
-              );
     
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC || CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
     registeKeyEvent();
 #endif
 
     return true;
+}
+
+void HelloWorld::countDown()
+{
+    char string[5] = {0};
+    sprintf(string, "%d", _time);
+    
+    auto label1 = (LabelTTF*) getChildByTag(1);
+    label1->setString(string);
+    
+    if(_time == 0)
+    {
+        removeChild(label1);
+        hideMapLayer();
+        _cantouch = true;
+    }
+    
+    _time = _time - 1;
 }
 
 void HelloWorld::hideMapLayer()
@@ -134,22 +150,25 @@ void HelloWorld::registeKeyEvent()
 
 void HelloWorld::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 {
-    switch(keyCode)
+    if(_cantouch)
     {
-        case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
-            playerGoLeft();
-            break;
-        case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
-            playerGoRight();
-            break;
-        case EventKeyboard::KeyCode::KEY_UP_ARROW:
-            playerGoUp();
-            break;
-        case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
-            playerGoDown();
-            break;
-        default:
-            break;
+        switch(keyCode)
+        {
+            case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
+                playerGoLeft();
+                break;
+            case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
+                playerGoRight();
+                break;
+            case EventKeyboard::KeyCode::KEY_UP_ARROW:
+                playerGoUp();
+                break;
+            case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
+                playerGoDown();
+                break;
+            default:
+                break;
+        }
     }
 }
 
@@ -210,7 +229,10 @@ void HelloWorld::updatePlayerPos(cocos2d::Vec2 newPosition, PosIndex newPosIndex
 
 bool HelloWorld::onTouchBegan(Touch* touch, Event  *event)
 {
-    _touchBegin = touch->getLocation();
+    if(_cantouch)
+    {
+        _touchBegin = touch->getLocation();
+    }
     return false;
 }
 
@@ -223,27 +245,30 @@ bool HelloWorld::onTouchBegan(Touch* touch, Event  *event)
 
 void HelloWorld::onTouchEnded(Touch* touch, Event  *event)
 {
-    _touchEnded = touch->getLocation();
-    
-    
-    if((_touchEnded.x - _touchBegin.x > 50) && (fabs(_touchEnded.y - _touchBegin.y) < 40))
+    if(_cantouch)
     {
-        // right
-        playerGoRight();
-    }
-    else if((_touchEnded.y - _touchBegin.y > 50) && (fabs(_touchEnded.x - _touchBegin.x) < 40))
-    {
-        // up
-        playerGoUp();
-    }
-    else if((_touchBegin.y - _touchEnded.y > 50) && (fabs(_touchBegin.x - _touchEnded.x) < 40))
-    {
-        // down
-        playerGoDown();
-    }
-    else if((_touchBegin.x - _touchEnded.x > 50) && (fabs(_touchBegin.y - _touchEnded.y) < 40))
-    {
-        // left
-        playerGoLeft();
+        _touchEnded = touch->getLocation();
+        
+        
+        if((_touchEnded.x - _touchBegin.x > 50) && (fabs(_touchEnded.y - _touchBegin.y) < 40))
+        {
+            // right
+            playerGoRight();
+        }
+        else if((_touchEnded.y - _touchBegin.y > 50) && (fabs(_touchEnded.x - _touchBegin.x) < 40))
+        {
+            // up
+            playerGoUp();
+        }
+        else if((_touchBegin.y - _touchEnded.y > 50) && (fabs(_touchBegin.x - _touchEnded.x) < 40))
+        {
+            // down
+            playerGoDown();
+        }
+        else if((_touchBegin.x - _touchEnded.x > 50) && (fabs(_touchBegin.y - _touchEnded.y) < 40))
+        {
+            // left
+            playerGoLeft();
+        }
     }
 }
