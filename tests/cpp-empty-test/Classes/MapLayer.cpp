@@ -228,6 +228,7 @@ void MapLayer::showBlock(PosIndex pos, bool bShowForever)
     }
 
     block->setVisible(true);
+    block->setOpacity(255);
     if (bShowForever)
     {
         block->setShownForever(bShowForever);
