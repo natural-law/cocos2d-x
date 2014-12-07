@@ -788,6 +788,7 @@
 		527D95601A32F40C0065F2AB /* grossinis_sister1.png in Resources */ = {isa = PBXBuildFile; fileRef = 527D955E1A32F3840065F2AB /* grossinis_sister1.png */; };
 		527D95621A331F950065F2AB /* basemap.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 527D95611A331F6B0065F2AB /* basemap.jpg */; };
 		527D95741A3409060065F2AB /* arial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 527D95731A3408F20065F2AB /* arial.ttf */; };
+		527D95761A341FC20065F2AB /* block_road.png in Resources */ = {isa = PBXBuildFile; fileRef = 527D95751A341FA00065F2AB /* block_road.png */; };
 		59620E8F1921E5CF002021B6 /* Bug-Child.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59620E8D1921E5CF002021B6 /* Bug-Child.cpp */; };
 		59620E901921E5CF002021B6 /* Bug-Child.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59620E8D1921E5CF002021B6 /* Bug-Child.cpp */; };
 		5EBEECB01995247000429821 /* DrawNode3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5EBEECAE1995247000429821 /* DrawNode3D.cpp */; };
@@ -1726,6 +1727,7 @@
 		527D955E1A32F3840065F2AB /* grossinis_sister1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = grossinis_sister1.png; path = "../tests/cpp-empty-test/Resources/grossinis_sister1.png"; sourceTree = "<group>"; };
 		527D95611A331F6B0065F2AB /* basemap.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = basemap.jpg; path = "../tests/cpp-empty-test/Resources/basemap.jpg"; sourceTree = "<group>"; };
 		527D95731A3408F20065F2AB /* arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = arial.ttf; path = "../tests/cpp-empty-test/Resources/arial.ttf"; sourceTree = "<group>"; };
+		527D95751A341FA00065F2AB /* block_road.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = block_road.png; path = "../tests/cpp-empty-test/Resources/block_road.png"; sourceTree = "<group>"; };
 		59620E8D1921E5CF002021B6 /* Bug-Child.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "Bug-Child.cpp"; sourceTree = "<group>"; };
 		59620E8E1921E5CF002021B6 /* Bug-Child.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bug-Child.h"; sourceTree = "<group>"; };
 		5EBEECAE1995247000429821 /* DrawNode3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DrawNode3D.cpp; path = Sprite3DTest/DrawNode3D.cpp; sourceTree = "<group>"; };
@@ -2140,6 +2142,7 @@
 		1AC358FD18CEC1EF00F37B72 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				527D95751A341FA00065F2AB /* block_road.png */,
 				527D95731A3408F20065F2AB /* arial.ttf */,
 				527D95611A331F6B0065F2AB /* basemap.jpg */,
 				527D955D1A32F3840065F2AB /* grossini.png */,
@@ -4241,6 +4244,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				527D95761A341FC20065F2AB /* block_road.png in Resources */,
 				527D95741A3409060065F2AB /* arial.ttf in Resources */,
 				527D95621A331F950065F2AB /* basemap.jpg in Resources */,
 				527D955F1A32F40C0065F2AB /* grossini.png in Resources */,
