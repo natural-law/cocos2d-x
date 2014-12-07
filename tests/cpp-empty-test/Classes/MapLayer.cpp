@@ -159,6 +159,14 @@ bool MapData::isRoadPos(PosIndex idx)
 
 BlockSprite* MapData::getBlockByIdx(const PosIndex & pos)
 {
+    if (pos.columnIdx >= MAX_COLUMN_COUNT || pos.columnIdx < 0) {
+        return nullptr;
+    }
+    
+    if (pos.rowIdx >= MAX_ROW_COUNT || pos.rowIdx < 0) {
+        return nullptr;
+    }
+
     ColumnData* col = _data.at(pos.columnIdx);
     BlockSprite* block = col->at(pos.rowIdx);
     
@@ -211,6 +219,11 @@ void MapLayer::hideAllBlocks()
 void MapLayer::showBlock(PosIndex pos)
 {
     auto block = _map->getBlockByIdx(pos);
+    if (block == nullptr)
+    {
+        return;
+    }
+
     block->setVisible(true);
 }
 
