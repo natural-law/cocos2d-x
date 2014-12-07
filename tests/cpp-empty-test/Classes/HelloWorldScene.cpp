@@ -141,18 +141,18 @@ void HelloWorld::resetMapLayer()
     
     addChild(_grid, 20);
     
-    auto label1 = LabelTTF::create("Power by cocos2d-x", "arial.ttf", 70);
+    auto label1 = LabelTTF::create("5", "arial.ttf", 70);
     label1->setAnchorPoint( Vec2(0.5,0.5) );
     label1->setPosition(Vec2(visibleOrigin.x + visibleSize.width/2, visibleOrigin.y + visibleSize.height/2));
-    addChild(label1, 0, 1);
+    addChild(label1, 50, 1);
     label1->setColor(Color3B::RED);
     auto fade = FadeOut::create(1.0f);
     auto fade_in = fade->reverse();
     auto seq = Sequence::create(fade, fade_in, nullptr);
     auto repeat = RepeatForever::create(seq);
     label1->runAction(repeat);
-    _time = 5;
-    schedule(CC_CALLBACK_0(HelloWorld::countDown, this), 1, 5, 1, " ");
+    _time = 4;
+    schedule(CC_CALLBACK_0(HelloWorld::countDown, this), 1, 4, 1, " ");
     
     _mapLayer->showBlock(_playerPosIndex, true);
     _mapLayer->showBlock(_bossPosIndex, true);
@@ -160,16 +160,19 @@ void HelloWorld::resetMapLayer()
 
 void HelloWorld::countDown()
 {
+    auto label1 = (LabelTTF*) getChildByTag(1);
+    
     char string[5] = {0};
     sprintf(string, "%d", _time);
-    
-    auto label1 = (LabelTTF*) getChildByTag(1);
     label1->setString(string);
     
+    if(_time == 1)
+    {
+        hideMapLayer();
+    }
     if(_time == 0)
     {
         removeChild(label1);
-        hideMapLayer();
         _cantouch = true;
         (static_cast<Menu*>(getChildByTag(100)))->setEnabled(true);
     }
