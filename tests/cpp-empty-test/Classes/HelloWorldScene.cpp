@@ -1,6 +1,7 @@
 #include "HelloWorldScene.h"
 #include "AppMacros.h"
 #include "math.h"
+#include "MyMenu.h"
 
 USING_NS_CC;
 
@@ -31,6 +32,7 @@ bool HelloWorld::init()
     }
     
     auto visibleSize = Director::getInstance()->getVisibleSize();
+    auto visibleOrigin = Director::getInstance()->getVisibleOrigin();
     auto origin = Director::getInstance()->getVisibleOrigin();
     
     _baseMap = cocos2d::Sprite::create("basemap.jpg");
@@ -40,6 +42,10 @@ bool HelloWorld::init()
     
     _baseMap->setPosition(Vec2(visibleSize / 2) + origin);
     addChild(_baseMap, -2);
+    
+    auto timeMenu = MyMenu::createMenu("press me 2 seconds", Vec2(visibleOrigin.x + 200, 50));
+    addChild(timeMenu);
+    addChild(timeMenu->label);
     
     
     // position the sprite on the center of the screen
@@ -71,7 +77,7 @@ bool HelloWorld::init()
     _player->setAnchorPoint(cocos2d::Vec2(0, 0));
     auto playerSize = _player->getContentSize();
     _player->setScale(_boxsize/playerSize.width, _boxsize/playerSize.height);
-    _playerPosIndex = _mapLayer->getMapData()->getPlayerPos();
+    _playerPosIndex = _mapLayer->getMapData()->getBeginPos();
     _playerPosition = _origin + Vec2(_playerPosIndex.columnIdx * _boxsize, _playerPosIndex.rowIdx * _boxsize);
     _player->setPosition(_playerPosition);
     addChild(_player);
@@ -80,8 +86,8 @@ bool HelloWorld::init()
     _boss->setAnchorPoint(cocos2d::Vec2(0, 0));
     auto bossSize = _boss->getContentSize();
     _boss->setScale(_boxsize/bossSize.width, _boxsize/bossSize.height);
-    auto bossPos = _mapLayer->getMapData()->getBossPos();
-    _boss->setPosition(_origin+Vec2(bossPos.columnIdx * _boxsize, bossPos.rowIdx * _boxsize));
+    _bossPosIndex = _mapLayer->getMapData()->getEndPos();
+    _boss->setPosition(_origin+Vec2(_bossPosIndex.columnIdx * _boxsize, _bossPosIndex.rowIdx * _boxsize));
     addChild(_boss);
     
     auto color = Color4F::GREEN;
@@ -98,15 +104,25 @@ bool HelloWorld::init()
     
     addChild(_grid, 20);
     
-    _mapLayer->hideAllBlocks();
-    _mapLayer->showBlock(_playerPosIndex);
-    _mapLayer->showBlock(bossPos);
+    runAction( Sequence::create(
+                                /*CallFunc::create( CC_CALLBACK_0(HelloWorld::countDown,this)),*/
+                                DelayTime::create(5.0f),
+                                CallFunc::create( CC_CALLBACK_0(HelloWorld::hideMapLayer,this)),
+                                nullptr)
+              );
     
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC || CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
     registeKeyEvent();
 #endif
 
     return true;
+}
+
+void HelloWorld::hideMapLayer()
+{
+    _mapLayer->hideAllBlocks();
+    _mapLayer->showBlock(_playerPosIndex);
+    _mapLayer->showBlock(_bossPosIndex);
 }
 
 void HelloWorld::registeKeyEvent()
@@ -195,7 +211,7 @@ void HelloWorld::updatePlayerPos(cocos2d::Vec2 newPosition, PosIndex newPosIndex
 bool HelloWorld::onTouchBegan(Touch* touch, Event  *event)
 {
     _touchBegin = touch->getLocation();
-    return true;
+    return false;
 }
 
 /*void transformPosition(Vec2& origin, float boxsize, Vec2& from, PosIndex& to)

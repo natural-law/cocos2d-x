@@ -120,8 +120,8 @@ void MapData::generateRoad()
         block->setType(BlockTypeRoad);
     }
     
-    _playerPos = PosIndex(road1[0][0], road1[0][1]);
-    _bossPos = PosIndex(road1[roadStepCount-1][0], road1[roadStepCount-1][1]);
+    _beginPos = PosIndex(road1[0][0], road1[0][1]);
+    _endPos = PosIndex(road1[roadStepCount-1][0], road1[roadStepCount-1][1]);
 }
 
 void MapData::randomRoad()
@@ -173,14 +173,14 @@ BlockSprite* MapData::getBlockByIdx(const PosIndex & pos)
     return block;
 }
 
-PosIndex& MapData::getPlayerPos()
+PosIndex& MapData::getBeginPos()
 {
-    return _playerPos;
+    return _beginPos;
 }
 
-PosIndex& MapData::getBossPos()
+PosIndex& MapData::getEndPos()
 {
-    return _bossPos;
+    return _endPos;
 }
 
 /////////////////////////////////

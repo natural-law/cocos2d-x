@@ -9,7 +9,8 @@ LOCAL_MODULE_FILENAME := libcpp_empty_test
 LOCAL_SRC_FILES := main.cpp \
                    ../../Classes/AppDelegate.cpp \
                    ../../Classes/HelloWorldScene.cpp \
-                   ../../Classes/MapLayer.cpp
+                   ../../Classes/MapLayer.cpp \
+                   ../../Classes/MyMenu.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes \
                     $(LOCAL_PATH)/../../../../extensions \
