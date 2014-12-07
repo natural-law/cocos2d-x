@@ -58,8 +58,8 @@ public:
     BlockSprite* getBlockByIdx(const PosIndex & pos);
     bool isRoadPos(PosIndex idx);
     
-    PosIndex& getPlayerPos();
-    PosIndex& getBossPos();
+    PosIndex& getBeginPos();
+    PosIndex& getEndPos();
 
 private:
     void generateRoad();
@@ -67,8 +67,8 @@ private:
 
     std::vector<ColumnData*> _data;
     
-    PosIndex _playerPos;
-    PosIndex _bossPos;
+    PosIndex _beginPos;
+    PosIndex _endPos;
 };
 
 class MapLayer : public cocos2d::LayerColor

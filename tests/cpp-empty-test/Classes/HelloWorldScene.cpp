@@ -77,7 +77,7 @@ bool HelloWorld::init()
     _player->setAnchorPoint(cocos2d::Vec2(0, 0));
     auto playerSize = _player->getContentSize();
     _player->setScale(_boxsize/playerSize.width, _boxsize/playerSize.height);
-    _playerPosIndex = _mapLayer->getMapData()->getPlayerPos();
+    _playerPosIndex = _mapLayer->getMapData()->getBeginPos();
     _playerPosition = _origin + Vec2(_playerPosIndex.columnIdx * _boxsize, _playerPosIndex.rowIdx * _boxsize);
     _player->setPosition(_playerPosition);
     addChild(_player);
@@ -86,7 +86,7 @@ bool HelloWorld::init()
     _boss->setAnchorPoint(cocos2d::Vec2(0, 0));
     auto bossSize = _boss->getContentSize();
     _boss->setScale(_boxsize/bossSize.width, _boxsize/bossSize.height);
-    _bossPosIndex = _mapLayer->getMapData()->getBossPos();
+    _bossPosIndex = _mapLayer->getMapData()->getEndPos();
     _boss->setPosition(_origin+Vec2(_bossPosIndex.columnIdx * _boxsize, _bossPosIndex.rowIdx * _boxsize));
     addChild(_boss);
     
