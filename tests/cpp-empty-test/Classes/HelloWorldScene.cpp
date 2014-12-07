@@ -50,6 +50,8 @@ bool HelloWorld::init()
     auto timeMenu = MyMenu::createMenu("press me 2 seconds", Vec2(visibleOrigin.x + 200, 50));
     addChild(timeMenu);
     addChild(timeMenu->label);
+    timeMenu->setTag(100);
+    timeMenu->setEnabled(false);
     
     // register listener
     auto listener = EventListenerTouchOneByOne::create();
@@ -169,6 +171,7 @@ void HelloWorld::countDown()
         removeChild(label1);
         hideMapLayer();
         _cantouch = true;
+        (static_cast<Menu*>(getChildByTag(100)))->setEnabled(true);
     }
     
     _time = _time - 1;
@@ -302,7 +305,6 @@ void HelloWorld::onTouchEnded(Touch* touch, Event  *event)
 {
     if(_cantouch)
     {
-        log("touch end");
         _touchEnded = touch->getLocation();
         
         bool hSide = false;
