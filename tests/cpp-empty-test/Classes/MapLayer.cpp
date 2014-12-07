@@ -29,6 +29,17 @@ BlockSprite::~BlockSprite()
     
 }
 
+void BlockSprite::hideByFadeOut()
+{
+    auto doCheck = [this]() {
+        if (this->isShownForever()) {
+            this->setVisible(true);
+            this->setOpacity(255);
+        }
+    };
+    runAction(Sequence::create(FadeOut::create(1.0f), CallFunc::create(doCheck), NULL) );
+}
+
 void BlockSprite::setType(BlockType type)
 {
     switch (type) {
@@ -202,7 +213,7 @@ void MapLayer::hideAllBlocks()
         {
             BlockSprite* block = _map->getBlockByIdx(PosIndex(i, j));
             if (!block->isShownForever()) {
-                block->runAction(FadeOut::create(1.0f));
+                block->hideByFadeOut();
             }
         }
     }

@@ -25,7 +25,8 @@ class BlockSprite : public cocos2d::Sprite
 public:
     BlockSprite(BlockType type);
     virtual ~BlockSprite();
-    
+
+    void hideByFadeOut();
     void setType(BlockType type);
     inline BlockType getType() { return _type; }
 
