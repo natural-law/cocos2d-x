@@ -2,6 +2,7 @@
 #include "DisplayMap.h"
 #include "AppMacros.h"
 #include "math.h"
+#include "MyMenu.h"
 
 USING_NS_CC;
 
@@ -32,6 +33,7 @@ bool HelloWorld::init()
     }
     
     auto visibleSize = Director::getInstance()->getVisibleSize();
+    auto visibleOrigin = Director::getInstance()->getVisibleOrigin();
     auto origin = Director::getInstance()->getVisibleOrigin();
     
     _baseMap = cocos2d::Sprite::create("basemap.jpg");
@@ -41,6 +43,10 @@ bool HelloWorld::init()
     
     _baseMap->setPosition(Vec2(visibleSize / 2) + origin);
     addChild(_baseMap, -2);
+    
+    auto timeMenu = MyMenu::createMenu("press me 2 seconds", Vec2(visibleOrigin.x + 200, 50));
+    addChild(timeMenu);
+    addChild(timeMenu->label);
     
     
     // position the sprite on the center of the screen
@@ -103,13 +109,15 @@ bool HelloWorld::init()
     _mapLayer->showBlock(_playerPosIndex);
     _mapLayer->showBlock(bossPos);
     
+    
+    
     return true;
 }
 
 bool HelloWorld::onTouchBegan(Touch* touch, Event  *event)
 {
     _touchBegin = touch->getLocation();
-    return true;
+    return false;
 }
 
 /*void transformPosition(Vec2& origin, float boxsize, Vec2& from, PosIndex& to)
