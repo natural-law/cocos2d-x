@@ -32,6 +32,9 @@ LOCAL_SRC_FILES := \
 ../../Classes/VisibleRect.cpp \
 ../../Classes/AppDelegate.cpp \
 ../../Classes/ConfigParser.cpp \
+../../Classes/ProjectConfig/ProjectConfig.cpp \
+../../Classes/ProjectConfig/SimulatorConfig.cpp \
+../../Classes/network/CCHTTPRequest.cpp \
 hellojavascript/Runtime_android.cpp \
 hellojavascript/main.cpp
 

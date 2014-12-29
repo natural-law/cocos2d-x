@@ -6,13 +6,6 @@
 #include "ConfigParser.h"
 #include "FileServer.h"
 
-#define CONFIG_FILE "config.json"
-#define CONSOLE_PORT 6050
-#define UPLOAD_PORT 6060
-#define DEBUG_PORT 5086
-#define WIN_WIDTH   960
-#define WIN_HEIGHT  640
-
 // ConfigParser
 ConfigParser *ConfigParser::s_sharedConfigParserInstance = NULL;
 ConfigParser *ConfigParser::getInstance(void)
@@ -30,8 +23,10 @@ void ConfigParser::purge()
 	CC_SAFE_DELETE(s_sharedConfigParserInstance);
 }
 
-void ConfigParser::readConfig()
+void ConfigParser::readConfig(const string &filepath)
 {
+    string fullPathFile = filepath;
+
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     // add writable path to search path temporarily for reading config file
     vector<std::string> searchPathArray = FileUtils::getInstance()->getSearchPaths();
@@ -40,7 +35,10 @@ void ConfigParser::readConfig()
 #endif
     
     // read config file
-    string fullPathFile = FileUtils::getInstance()->fullPathForFilename(CONFIG_FILE);
+    if (fullPathFile.empty())
+    {
+        fullPathFile = FileUtils::getInstance()->fullPathForFilename(CONFIG_FILE);
+    }
     string fileContent = FileUtils::getInstance()->getStringFromFile(fullPathFile);
   
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
@@ -84,25 +82,25 @@ void ConfigParser::readConfig()
             }
             if (objectInitView.HasMember("entry") && objectInitView["entry"].IsString())
             {
-                _entryfile = objectInitView["entry"].GetString();
+                setEntryFile(objectInitView["entry"].GetString());
             }
             if (objectInitView.HasMember("consolePort"))
             {
                 _consolePort = objectInitView["consolePort"].GetUint();
                 if(_consolePort <= 0)
-                    _consolePort = CONSOLE_PORT;
+                    _consolePort = kProjectConfigConsolePort;
             }
             if (objectInitView.HasMember("debugPort"))
             {
                 _debugPort = objectInitView["debugPort"].GetUint();
                 if(_debugPort<=0)
-                    _debugPort = DEBUG_PORT;
+                    _debugPort = kProjectConfigDebugPort;
             }
             if (objectInitView.HasMember("uploadPort"))
             {
                 _uploadPort = objectInitView["uploadPort"].GetUint();
                 if(_uploadPort <= 0)
-                    _uploadPort = UPLOAD_PORT;
+                    _uploadPort = kProjectConfigUploadPort;
             }
             if (objectInitView.HasMember("isWindowTop") && objectInitView["isWindowTop"].IsBool())
             {
@@ -130,12 +128,13 @@ void ConfigParser::readConfig()
 ConfigParser::ConfigParser(void) :
 _isLandscape(true),
 _isWindowTop(false),
-_consolePort(CONSOLE_PORT),
-_uploadPort(UPLOAD_PORT),
-_debugPort(DEBUG_PORT),
+_consolePort(kProjectConfigConsolePort),
+_uploadPort(kProjectConfigUploadPort),
+_debugPort(kProjectConfigDebugPort),
 _viewName("HelloJavascript"),
 _entryfile("main.js"),
-_initViewSize(WIN_WIDTH, WIN_HEIGHT)
+_initViewSize(ProjectConfig::DEFAULT_HEIGHT, ProjectConfig::DEFAULT_WIDTH),
+_bindAddress("")
 {
 }
 
@@ -167,6 +166,14 @@ bool ConfigParser::isWindowTop()
 {
     return _isWindowTop;
 }
+void ConfigParser::setConsolePort(int port)
+{
+    _consolePort = port;
+}
+void ConfigParser::setUploadPort(int port)
+{
+    _uploadPort = port;
+}
 int ConfigParser::getConsolePort()
 {
     return _consolePort;
@@ -188,4 +195,24 @@ int ConfigParser::getScreenSizeCount(void)
 const SimulatorScreenSize ConfigParser::getScreenSize(int index)
 {
     return _screenSizeArray.at(index);
+}
+
+void ConfigParser::setEntryFile(const std::string &file)
+{
+    _entryfile = file;
+}
+
+void ConfigParser::setInitViewSize(const cocos2d::Size &size)
+{
+    _initViewSize = size;
+}
+
+void ConfigParser::setBindAddress(const std::string &address)
+{
+    _bindAddress = address;
+}
+
+const std::string &ConfigParser::getBindAddress()
+{
+    return _bindAddress;
 }

@@ -86,6 +86,9 @@ void ConsoleCommand::init()
     {
         _console->addCommand(commands[i]);
     }
+
+    // set bind address
+    _console->setBindAddress(ConfigParser::getInstance()->getBindAddress());
 #if(CC_PLATFORM_MAC == CC_TARGET_PLATFORM || CC_PLATFORM_WIN32 == CC_TARGET_PLATFORM)
     _console->listenOnTCP(ConfigParser::getInstance()->getConsolePort());
 #else     
@@ -284,13 +287,39 @@ void ConsoleCommand::onSendCommand(int fd, const std::string &args)
                 
                 dReplyParse.AddMember("code", 0, dReplyParse.GetAllocator());
             }
+            else if (strcmp(strcmd.c_str(), "workdir") == 0)
+            {
+                if (dArgParse.HasMember("path"))
+                {
+                    const rapidjson::Value& objectPath = dArgParse["path"];
+                    FileUtils::getInstance()->setDefaultResourceRootPath(objectPath.GetString());
+                    
+                    rapidjson::Value bodyvalue(rapidjson::kObjectType);
+                    bodyvalue.AddMember("path", objectPath.GetString(), dReplyParse.GetAllocator());
+                    dReplyParse.AddMember("body", bodyvalue, dReplyParse.GetAllocator());
+                }
+                dReplyParse.AddMember("code", 0, dReplyParse.GetAllocator());
+            }
+            else if (strcmp(strcmd.c_str(), "writablePath") == 0)
+            {
+                if (dArgParse.HasMember("path"))
+                {
+                    const rapidjson::Value& objectPath = dArgParse["path"];
+                    FileUtils::getInstance()->setWritablePath(objectPath.GetString());
+                    
+                    rapidjson::Value bodyvalue(rapidjson::kObjectType);
+                    bodyvalue.AddMember("path", objectPath.GetString(), dReplyParse.GetAllocator());
+                    dReplyParse.AddMember("body", bodyvalue, dReplyParse.GetAllocator());
+                }
+                dReplyParse.AddMember("code", 0, dReplyParse.GetAllocator());
+            }
             
             rapidjson::StringBuffer buffer;
             rapidjson::Writer< rapidjson::StringBuffer > writer(buffer);
             dReplyParse.Accept(writer);
             string msgContent = buffer.GetString();
             char msgLength[64] = {0x1, 0};
-            sprintf(msgLength + 1, "%d:", msgContent.size());
+            snprintf(msgLength + 1, sizeof(msgLength), "%ld:", msgContent.size());
             
             string msg(msgLength + msgContent);
             

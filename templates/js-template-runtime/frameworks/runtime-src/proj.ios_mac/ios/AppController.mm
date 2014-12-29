@@ -31,6 +31,9 @@
 #import "RootViewController.h"
 #import "platform/ios/CCEAGLView-ios.h"
 
+#include "ConfigParser.h"
+#include "ProjectConfig.h"
+
 @implementation AppController
 
 #pragma mark -
@@ -81,6 +84,12 @@ static AppDelegate s_sharedApplication;
     cocos2d::GLView *glview = cocos2d::GLViewImpl::createWithEAGLView(eaglView);
     cocos2d::Director::getInstance()->setOpenGLView(glview);
 
+    // config
+    ProjectConfig projectConfig;
+    auto config = ConfigParser::getInstance();
+    projectConfig.setScriptFile(config->getEntryFile());
+    s_sharedApplication.setProjectConfig(projectConfig);
+    
     cocos2d::Application::getInstance()->run();
     return YES;
 }

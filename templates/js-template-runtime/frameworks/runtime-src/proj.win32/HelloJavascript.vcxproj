@@ -83,7 +83,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\Classes;$(ProjectDir)..\Classes\runtime;$(ProjectDir)..\Classes\protobuf-lite;$(EngineRoot)external\win32-specific\zlib\include;$(EngineRoot);$(EngineRoot)cocos;$(EngineRoot)cocos\base;$(EngineRoot)external;$(EngineRoot)cocos\storage;$(EngineRoot)cocos\editor-support;$(EngineRoot)cocos\scripting\js-bindings\auto;$(EngineRoot)cocos\scripting\js-bindings\manual;$(EngineRoot)cocos\audio\include;$(EngineRoot)external\spidermonkey\include\win32;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Classes;$(ProjectDir)..\Classes\service;$(ProjectDir)..\Classes\runtime;$(ProjectDir)..\Classes\protobuf-lite;$(EngineRoot)external\win32-specific\zlib\include;$(EngineRoot);$(EngineRoot)cocos;$(EngineRoot)cocos\base;$(EngineRoot)external;$(EngineRoot)cocos\storage;$(EngineRoot)cocos\editor-support;$(EngineRoot)cocos\scripting\js-bindings\auto;$(EngineRoot)cocos\scripting\js-bindings\manual;$(EngineRoot)cocos\audio\include;$(EngineRoot)external\spidermonkey\include\win32;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)external\curl\include\win32;$(EngineRoot)extensions;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_DEBUG;XP_WIN;JS_HAVE___INTN;JS_INTPTR_TYPE=int;COCOS2D_DEBUG=1;COCOS2D_JAVASCRIPT=1;CC_ENABLE_CHIPMUNK_INTEGRATION=1;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;GLFW_EXPOSE_NATIVE_WIN32;GLFW_EXPOSE_NATIVE_WGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -141,7 +141,7 @@ xcopy /s "$(ProjectDir)..\..\cocos2d-x\cocos\scripting\js-bindings\script" "$(Pr
       <ProxyFileName>game_p.c</ProxyFileName>
     </Midl>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\Classes;$(ProjectDir)..\Classes\protobuf-lite;$(ProjectDir)..\Classes\runtime;$(EngineRoot)external\win32-specific\zlib\include;$(EngineRoot);$(EngineRoot)cocos;$(EngineRoot)cocos\base;$(EngineRoot)cocos\storage;$(EngineRoot)cocos\editor-support;$(EngineRoot)cocos\scripting\js-bindings\auto;$(EngineRoot)cocos\scripting\js-bindings\manual;$(EngineRoot)cocos\audio\include;$(EngineRoot)external;$(EngineRoot)external\spidermonkey\include\win32;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Classes;$(ProjectDir)..\Classes\protobuf-lite;$(ProjectDir)..\Classes\service;$(ProjectDir)..\Classes\runtime;$(EngineRoot)external\win32-specific\zlib\include;$(EngineRoot);$(EngineRoot)cocos;$(EngineRoot)cocos\base;$(EngineRoot)cocos\storage;$(EngineRoot)cocos\editor-support;$(EngineRoot)cocos\scripting\js-bindings\auto;$(EngineRoot)cocos\scripting\js-bindings\manual;$(EngineRoot)cocos\audio\include;$(EngineRoot)external;$(EngineRoot)external\spidermonkey\include\win32;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;NDEBUG;XP_WIN;JS_HAVE___INTN;JS_INTPTR_TYPE=int;COCOS2D_JAVASCRIPT=1;CC_ENABLE_CHIPMUNK_INTEGRATION=1;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;GLFW_EXPOSE_NATIVE_WIN32;GLFW_EXPOSE_NATIVE_WGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>
       </ExceptionHandling>
@@ -190,6 +190,9 @@ xcopy "$(ProjectDir)..\..\..\res" "$(OutDir)\Resource\res" /e /Y</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\ConfigParser.cpp" />
+    <ClCompile Include="..\Classes\network\CCHTTPRequest.cpp" />
+    <ClCompile Include="..\Classes\ProjectConfig\ProjectConfig.cpp" />
+    <ClCompile Include="..\Classes\ProjectConfig\SimulatorConfig.cpp" />
     <ClCompile Include="..\Classes\protobuf-lite\google\protobuf\extension_set.cc" />
     <ClCompile Include="..\Classes\protobuf-lite\google\protobuf\generated_message_util.cc" />
     <ClCompile Include="..\Classes\protobuf-lite\google\protobuf\io\coded_stream.cc" />
@@ -212,14 +215,33 @@ xcopy "$(ProjectDir)..\..\..\res" "$(OutDir)\Resource\res" /e /Y</Command>
     <ClCompile Include="..\Classes\runtime\Protos.pb.cc" />
     <ClCompile Include="..\Classes\runtime\Runtime.cpp" />
     <ClCompile Include="..\Classes\runtime\Shine_png.cpp" />
+    <ClCompile Include="..\Classes\service\AppEvent.cpp" />
+    <ClCompile Include="..\Classes\service\AppLang.cpp" />
+    <ClCompile Include="..\Classes\service\PlayerMenuServiceProtocol.cpp" />
+    <ClCompile Include="..\Classes\service\PlayerProtocol.cpp" />
+    <ClCompile Include="..\Classes\service\PlayerServiceProtocol.cpp" />
+    <ClCompile Include="..\Classes\service\PlayerSettings.cpp" />
+    <ClCompile Include="..\Classes\service\PlayerTaskServiceProtocol.cpp" />
+    <ClCompile Include="..\Classes\service\PlayerUtils.cpp" />
     <ClCompile Include="..\Classes\VisibleRect.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="Runtime_win32.cpp" />
-    <ClCompile Include="SimulatorWindow.cpp" />
+    <ClCompile Include="service\DeviceEx-win32.cpp" />
+    <ClCompile Include="service\PlayerEditBoxServiceWin.cpp" />
+    <ClCompile Include="service\PlayerFileDialogServiceWin.cpp" />
+    <ClCompile Include="service\PlayerMenuServiceWin.cpp" />
+    <ClCompile Include="service\PlayerMessageBoxServiceWin.cpp" />
+    <ClCompile Include="service\PlayerTaskServiceWin.cpp" />
+    <ClCompile Include="service\PlayerWin.cpp" />
+    <ClCompile Include="service\stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\ConfigParser.h" />
+    <ClInclude Include="..\Classes\network\CCHTTPRequest.h" />
+    <ClInclude Include="..\Classes\network\CCHTTPRequestDelegate.h" />
+    <ClInclude Include="..\Classes\ProjectConfig\ProjectConfig.h" />
+    <ClInclude Include="..\Classes\ProjectConfig\SimulatorConfig.h" />
     <ClInclude Include="..\Classes\protobuf-lite\config.h" />
     <ClInclude Include="..\Classes\protobuf-lite\google\protobuf\extension_set.h" />
     <ClInclude Include="..\Classes\protobuf-lite\google\protobuf\generated_message_util.h" />
@@ -249,11 +271,32 @@ xcopy "$(ProjectDir)..\..\..\res" "$(OutDir)\Resource\res" /e /Y</Command>
     <ClInclude Include="..\Classes\runtime\Protos.pb.h" />
     <ClInclude Include="..\Classes\runtime\ResData.h" />
     <ClInclude Include="..\Classes\runtime\Runtime.h" />
+    <ClInclude Include="..\Classes\service\AppEvent.h" />
+    <ClInclude Include="..\Classes\service\AppLang.h" />
+    <ClInclude Include="..\Classes\service\DeviceEx.h" />
+    <ClInclude Include="..\Classes\service\PlayerEditBoxServiceProtocol.h" />
+    <ClInclude Include="..\Classes\service\PlayerFileDialogServiceProtocol.h" />
+    <ClInclude Include="..\Classes\service\PlayerMacros.h" />
+    <ClInclude Include="..\Classes\service\PlayerMenuServiceProtocol.h" />
+    <ClInclude Include="..\Classes\service\PlayerMessageBoxServiceProtocol.h" />
+    <ClInclude Include="..\Classes\service\PlayerProtocol.h" />
+    <ClInclude Include="..\Classes\service\PlayerServiceProtocol.h" />
+    <ClInclude Include="..\Classes\service\PlayerSettings.h" />
+    <ClInclude Include="..\Classes\service\PlayerTaskServiceProtocol.h" />
+    <ClInclude Include="..\Classes\service\PlayerUtils.h" />
     <ClInclude Include="..\Classes\VisibleRect.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="SimulatorWindow.h" />
+    <ClInclude Include="service\PlayerEditBoxServiceWin.h" />
+    <ClInclude Include="service\PlayerFileDialogServiceWin.h" />
+    <ClInclude Include="service\PlayerMenuServiceWin.h" />
+    <ClInclude Include="service\PlayerMessageBoxServiceWin.h" />
+    <ClInclude Include="service\PlayerTaskServiceWin.h" />
+    <ClInclude Include="service\PlayerWin.h" />
+    <ClInclude Include="service\resource.h" />
+    <ClInclude Include="service\stdafx.h" />
+    <ClInclude Include="service\targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc" />

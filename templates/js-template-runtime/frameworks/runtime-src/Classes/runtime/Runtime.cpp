@@ -82,7 +82,7 @@ std::string& replaceAll(std::string& str, const std::string& old_value, const st
 
 const char* getRuntimeVersion()
 {
-    return "1.6";
+    return "1.7";
 }
 
 bool startScript()
@@ -200,20 +200,27 @@ void register_FileUtils(JSContext *cx, JSObject *global) {
     JS_DefineFunction(cx, tmpObj, "setSearchPaths", runtime_FileUtils_setSearchPaths, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE);
 }
 
-void initRuntime()
+void initRuntime(const std::string& workPath)
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32 || CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
     vector<std::string> searchPathArray = FileUtils::getInstance()->getSearchPaths();
     
-    extern std::string getCurAppPath();
-    std::string appPath = getCurAppPath();
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-    appPath.append("/../../");
-#elif (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
-    appPath.append("/../../../");
-#endif
-    appPath = replaceAll(appPath, "\\", "/");
-    g_projectPath = appPath;
+    if (workPath.empty())
+    {
+        extern std::string getCurAppPath();
+        std::string appPath = getCurAppPath();
+    #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+        appPath.append("/../../");
+    #elif (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+        appPath.append("/../../../");
+    #endif
+        appPath = replaceAll(appPath, "\\", "/");
+        g_projectPath = appPath;
+    }
+    else
+    {
+        g_projectPath = workPath;
+    }
     
     // add project's root directory to search path
     searchPathArray.insert(searchPathArray.begin(), g_projectPath);
@@ -253,4 +260,11 @@ void endRuntime()
 	ConsoleCommand::purge();
 	FileServer::getShareInstance()->stop();
 	//FileServer::purge();
+}
+
+void resetDesignResolution()
+{
+    cocos2d::Size size = ConfigParser::getInstance()->getInitViewSize();
+    auto glview = Director::getInstance()->getOpenGLView();
+    glview->setDesignResolutionSize(size.width, size.height, glview->getResolutionPolicy());
 }
