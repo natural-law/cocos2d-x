@@ -5,22 +5,12 @@
 #include <vector>
 #include "cocos2d.h"
 #include "json/document.h"
+#include "ProjectConfig/SimulatorConfig.h"
+#include "ProjectConfig/ProjectConfig.h"
 using namespace std;
 USING_NS_CC;
 
-// ConfigParser
-typedef struct _SimulatorScreenSize {
-    string title;
-    int width;
-    int height;
-
-    _SimulatorScreenSize(const string title_, int width_, int height_)
-    {
-        title  = title_;
-        width  = width_;
-        height = height_;
-    }
-} SimulatorScreenSize;
+#define CONFIG_FILE "config.json"
 
 typedef vector<SimulatorScreenSize> ScreenSizeArray;
 class ConfigParser
@@ -29,6 +19,8 @@ public:
     static ConfigParser *getInstance(void);
 	static void purge();
 
+    void readConfig(const string &filepath = "");
+
     // predefined screen size
     int getScreenSizeCount(void);
     cocos2d::Size getInitViewSize();
@@ -36,14 +28,20 @@ public:
     string getEntryFile();
     rapidjson::Document& getConfigJsonRoot();
     const SimulatorScreenSize getScreenSize(int index);
+    void setConsolePort(int port);
+    void setUploadPort(int port);
     int getConsolePort();
     int getUploadPort();
     int getDebugPort();
     bool isLanscape();
     bool isWindowTop();
     
+    void setEntryFile(const std::string &file);
+    void setInitViewSize(const cocos2d::Size &size);
+    void setBindAddress(const std::string &address);
+    const std::string &getBindAddress();
+    
 private:
-    void readConfig();
     ConfigParser(void);
     static ConfigParser *s_sharedConfigParserInstance;
     ScreenSizeArray _screenSizeArray;
@@ -55,7 +53,8 @@ private:
     int _consolePort;
     int _uploadPort;
     int _debugPort;
-    
+
+    std::string _bindAddress;
     rapidjson::Document _docRootjson;
 };
 

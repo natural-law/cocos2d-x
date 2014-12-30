@@ -27,6 +27,7 @@ THE SOFTWARE.
 
 #include <string>
 #include "ScriptingCore.h"
+#include <functional>
 
 void recvBuf(int fd, char *pbuf, unsigned long bufsize);
 
@@ -40,11 +41,13 @@ const char* getRuntimeVersion();
 
 bool startScript();
 
-void initRuntime();
+void initRuntime(const std::string& workPath);
 
 void startRuntime();
 
 void endRuntime();
 
+//
+void resetDesignResolution();
 #endif // _RUNTIME__H_
 

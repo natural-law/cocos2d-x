@@ -1,5 +1,6 @@
 /****************************************************************************
-Copyright (c) 2013 cocos2d-x.org
+Copyright (c) 2010      cocos2d-x.org
+Copyright (c) 2013-2014 Chukong Technologies Inc.
 
 http://www.cocos2d-x.org
 
@@ -22,12 +23,33 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 
-#ifndef __SIMULATOR_WINDOW_H_
-#define __SIMULATOR_WINDOW_H_
+#include "base/CCAsyncTaskPool.h"
 
-/************************
-@brief create Simulator
-*********************************/
-void createSimulator(const char* viewName, float width, float height,bool isLandscape = true,float frameZoomFactor = 1.0f);
+NS_CC_BEGIN
 
-#endif /* __PROJECT_CONFIG_H_ */
+AsyncTaskPool* AsyncTaskPool::s_asyncTaskPool = nullptr;
+
+AsyncTaskPool* AsyncTaskPool::getInstance()
+{
+    if (s_asyncTaskPool == nullptr)
+    {
+        s_asyncTaskPool = new (std::nothrow) AsyncTaskPool();
+    }
+    return s_asyncTaskPool;
+}
+
+void AsyncTaskPool::destoryInstance()
+{
+    delete s_asyncTaskPool;
+    s_asyncTaskPool = nullptr;
+}
+
+AsyncTaskPool::AsyncTaskPool()
+{
+}
+
+AsyncTaskPool::~AsyncTaskPool()
+{
+}
+
+NS_CC_END

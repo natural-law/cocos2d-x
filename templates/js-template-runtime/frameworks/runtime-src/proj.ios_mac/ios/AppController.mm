@@ -31,6 +31,9 @@
 #import "RootViewController.h"
 #import "platform/ios/CCEAGLView-ios.h"
 
+#include "ConfigParser.h"
+#include "ProjectConfig.h"
+
 @implementation AppController
 
 #pragma mark -
@@ -80,7 +83,7 @@ static AppDelegate s_sharedApplication;
     // IMPORTANT: Setting the GLView should be done after creating the RootViewController
     cocos2d::GLView *glview = cocos2d::GLViewImpl::createWithEAGLView(eaglView);
     cocos2d::Director::getInstance()->setOpenGLView(glview);
-
+    
     cocos2d::Application::getInstance()->run();
     return YES;
 }

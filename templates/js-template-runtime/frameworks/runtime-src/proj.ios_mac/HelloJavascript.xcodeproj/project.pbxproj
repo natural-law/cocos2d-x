@@ -75,6 +75,31 @@
 		509D4AE717EBB81800697056 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509D4AE617EBB81800697056 /* OpenGL.framework */; };
 		509D4AE917EBB82000697056 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509D4AE817EBB82000697056 /* AppKit.framework */; };
 		509D4AEB17EBB82600697056 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509D4AEA17EBB82600697056 /* IOKit.framework */; };
+		9FD1E6B11A51361B0009A6C5 /* ConsoleWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FD1E69E1A51361B0009A6C5 /* ConsoleWindow.xib */; };
+		9FD1E6B21A51361B0009A6C5 /* ConsoleWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD1E6A01A51361B0009A6C5 /* ConsoleWindowController.m */; };
+		9FD1E6B31A51361B0009A6C5 /* DeviceEx-mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9FD1E6A11A51361B0009A6C5 /* DeviceEx-mac.mm */; };
+		9FD1E6B41A51361B0009A6C5 /* OpenUDIDMac.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD1E6A41A51361B0009A6C5 /* OpenUDIDMac.m */; };
+		9FD1E6B51A51361B0009A6C5 /* PlayerEditBoxServiceMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9FD1E6A61A51361B0009A6C5 /* PlayerEditBoxServiceMac.mm */; };
+		9FD1E6B61A51361B0009A6C5 /* PlayerFileDialogServiceMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9FD1E6A81A51361B0009A6C5 /* PlayerFileDialogServiceMac.mm */; };
+		9FD1E6B71A51361B0009A6C5 /* PlayerMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9FD1E6AA1A51361B0009A6C5 /* PlayerMac.mm */; };
+		9FD1E6B81A51361B0009A6C5 /* PlayerMenuServiceMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9FD1E6AC1A51361B0009A6C5 /* PlayerMenuServiceMac.mm */; };
+		9FD1E6B91A51361B0009A6C5 /* PlayerMessageBoxServiceMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9FD1E6AE1A51361B0009A6C5 /* PlayerMessageBoxServiceMac.mm */; };
+		9FD1E6BA1A51361B0009A6C5 /* PlayerTaskServiceMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9FD1E6B01A51361B0009A6C5 /* PlayerTaskServiceMac.mm */; };
+		9FD1E6BD1A51362E0009A6C5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FD1E6BB1A51362E0009A6C5 /* MainMenu.xib */; };
+		9FD1E6C01A513AAC0009A6C5 /* lang in Resources */ = {isa = PBXBuildFile; fileRef = 9FD1E6BF1A513AAC0009A6C5 /* lang */; };
+		9FD1E6CE1A5169180009A6C5 /* ProjectConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FD1E6CA1A5169180009A6C5 /* ProjectConfig.cpp */; };
+		9FD1E6CF1A5169180009A6C5 /* ProjectConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FD1E6CA1A5169180009A6C5 /* ProjectConfig.cpp */; };
+		9FD1E6D01A5169180009A6C5 /* SimulatorConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FD1E6CC1A5169180009A6C5 /* SimulatorConfig.cpp */; };
+		9FD1E6D11A5169180009A6C5 /* SimulatorConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FD1E6CC1A5169180009A6C5 /* SimulatorConfig.cpp */; };
+		9FD1E6EC1A5169230009A6C5 /* CCHTTPRequest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FD1E6D31A5169230009A6C5 /* CCHTTPRequest.cpp */; };
+		9FD1E6ED1A5169230009A6C5 /* AppEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FD1E6D71A5169230009A6C5 /* AppEvent.cpp */; };
+		9FD1E6EE1A5169230009A6C5 /* AppLang.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FD1E6D91A5169230009A6C5 /* AppLang.cpp */; };
+		9FD1E6EF1A5169230009A6C5 /* PlayerMenuServiceProtocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FD1E6DF1A5169230009A6C5 /* PlayerMenuServiceProtocol.cpp */; };
+		9FD1E6F01A5169230009A6C5 /* PlayerProtocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FD1E6E21A5169230009A6C5 /* PlayerProtocol.cpp */; };
+		9FD1E6F11A5169230009A6C5 /* PlayerServiceProtocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FD1E6E41A5169230009A6C5 /* PlayerServiceProtocol.cpp */; };
+		9FD1E6F21A5169230009A6C5 /* PlayerSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FD1E6E61A5169230009A6C5 /* PlayerSettings.cpp */; };
+		9FD1E6F31A5169230009A6C5 /* PlayerTaskServiceProtocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FD1E6E81A5169230009A6C5 /* PlayerTaskServiceProtocol.cpp */; };
+		9FD1E6F41A5169230009A6C5 /* PlayerUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FD1E6EA1A5169230009A6C5 /* PlayerUtils.cpp */; };
 		A92275421517C094001B78AA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A92275411517C094001B78AA /* QuartzCore.framework */; };
 		A92275441517C094001B78AA /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A92275431517C094001B78AA /* OpenGLES.framework */; };
 		A92275461517C094001B78AA /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A92275451517C094001B78AA /* OpenAL.framework */; };
@@ -111,7 +136,6 @@
 		C037820C18BF77C500FE4F13 /* libjsbindings iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C037820918BF76AF00FE4F13 /* libjsbindings iOS.a */; };
 		C037820F18BF77DE00FE4F13 /* libjsbindings Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C037820718BF76AF00FE4F13 /* libjsbindings Mac.a */; };
 		C03C8B4B18A770DD00723415 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C03C8B4818A770DD00723415 /* main.m */; };
-		C03C8B4C18A770DD00723415 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C03C8B4918A770DD00723415 /* MainMenu.xib */; };
 		C05D1C171923467600B808A4 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = C05D1C161923467600B808A4 /* config.json */; };
 		C05D1C181923467600B808A4 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = C05D1C161923467600B808A4 /* config.json */; };
 		C06C37881918E81100617BED /* ConfigParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C06C37861918E81100617BED /* ConfigParser.cpp */; };
@@ -358,7 +382,56 @@
 		509D4AE617EBB81800697056 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		509D4AE817EBB82000697056 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		509D4AEA17EBB82600697056 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
-		A922753D1517C094001B78AA /* HelloJavascript iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HelloJavascript iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9FD1E69E1A51361B0009A6C5 /* ConsoleWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConsoleWindow.xib; sourceTree = "<group>"; };
+		9FD1E69F1A51361B0009A6C5 /* ConsoleWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleWindowController.h; sourceTree = "<group>"; };
+		9FD1E6A01A51361B0009A6C5 /* ConsoleWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleWindowController.m; sourceTree = "<group>"; };
+		9FD1E6A11A51361B0009A6C5 /* DeviceEx-mac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "DeviceEx-mac.mm"; sourceTree = "<group>"; };
+		9FD1E6A31A51361B0009A6C5 /* OpenUDIDMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDIDMac.h; sourceTree = "<group>"; };
+		9FD1E6A41A51361B0009A6C5 /* OpenUDIDMac.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDIDMac.m; sourceTree = "<group>"; };
+		9FD1E6A51A51361B0009A6C5 /* PlayerEditBoxServiceMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerEditBoxServiceMac.h; sourceTree = "<group>"; };
+		9FD1E6A61A51361B0009A6C5 /* PlayerEditBoxServiceMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerEditBoxServiceMac.mm; sourceTree = "<group>"; };
+		9FD1E6A71A51361B0009A6C5 /* PlayerFileDialogServiceMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerFileDialogServiceMac.h; sourceTree = "<group>"; };
+		9FD1E6A81A51361B0009A6C5 /* PlayerFileDialogServiceMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerFileDialogServiceMac.mm; sourceTree = "<group>"; };
+		9FD1E6A91A51361B0009A6C5 /* PlayerMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerMac.h; sourceTree = "<group>"; };
+		9FD1E6AA1A51361B0009A6C5 /* PlayerMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerMac.mm; sourceTree = "<group>"; };
+		9FD1E6AB1A51361B0009A6C5 /* PlayerMenuServiceMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerMenuServiceMac.h; sourceTree = "<group>"; };
+		9FD1E6AC1A51361B0009A6C5 /* PlayerMenuServiceMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerMenuServiceMac.mm; sourceTree = "<group>"; };
+		9FD1E6AD1A51361B0009A6C5 /* PlayerMessageBoxServiceMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerMessageBoxServiceMac.h; sourceTree = "<group>"; };
+		9FD1E6AE1A51361B0009A6C5 /* PlayerMessageBoxServiceMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerMessageBoxServiceMac.mm; sourceTree = "<group>"; };
+		9FD1E6AF1A51361B0009A6C5 /* PlayerTaskServiceMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerTaskServiceMac.h; sourceTree = "<group>"; };
+		9FD1E6B01A51361B0009A6C5 /* PlayerTaskServiceMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerTaskServiceMac.mm; sourceTree = "<group>"; };
+		9FD1E6BC1A51362E0009A6C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		9FD1E6BE1A5136370009A6C5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.xib"; sourceTree = "<group>"; };
+		9FD1E6BF1A513AAC0009A6C5 /* lang */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = lang; path = ../Classes/lang; sourceTree = "<group>"; };
+		9FD1E6CA1A5169180009A6C5 /* ProjectConfig.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ProjectConfig.cpp; sourceTree = "<group>"; };
+		9FD1E6CB1A5169180009A6C5 /* ProjectConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectConfig.h; sourceTree = "<group>"; };
+		9FD1E6CC1A5169180009A6C5 /* SimulatorConfig.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimulatorConfig.cpp; sourceTree = "<group>"; };
+		9FD1E6CD1A5169180009A6C5 /* SimulatorConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimulatorConfig.h; sourceTree = "<group>"; };
+		9FD1E6D31A5169230009A6C5 /* CCHTTPRequest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHTTPRequest.cpp; sourceTree = "<group>"; };
+		9FD1E6D41A5169230009A6C5 /* CCHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHTTPRequest.h; sourceTree = "<group>"; };
+		9FD1E6D51A5169230009A6C5 /* CCHTTPRequestDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHTTPRequestDelegate.h; sourceTree = "<group>"; };
+		9FD1E6D71A5169230009A6C5 /* AppEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppEvent.cpp; sourceTree = "<group>"; };
+		9FD1E6D81A5169230009A6C5 /* AppEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppEvent.h; sourceTree = "<group>"; };
+		9FD1E6D91A5169230009A6C5 /* AppLang.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppLang.cpp; sourceTree = "<group>"; };
+		9FD1E6DA1A5169230009A6C5 /* AppLang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppLang.h; sourceTree = "<group>"; };
+		9FD1E6DB1A5169230009A6C5 /* DeviceEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceEx.h; sourceTree = "<group>"; };
+		9FD1E6DC1A5169230009A6C5 /* PlayerEditBoxServiceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerEditBoxServiceProtocol.h; sourceTree = "<group>"; };
+		9FD1E6DD1A5169230009A6C5 /* PlayerFileDialogServiceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerFileDialogServiceProtocol.h; sourceTree = "<group>"; };
+		9FD1E6DE1A5169230009A6C5 /* PlayerMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerMacros.h; sourceTree = "<group>"; };
+		9FD1E6DF1A5169230009A6C5 /* PlayerMenuServiceProtocol.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerMenuServiceProtocol.cpp; sourceTree = "<group>"; };
+		9FD1E6E01A5169230009A6C5 /* PlayerMenuServiceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerMenuServiceProtocol.h; sourceTree = "<group>"; };
+		9FD1E6E11A5169230009A6C5 /* PlayerMessageBoxServiceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerMessageBoxServiceProtocol.h; sourceTree = "<group>"; };
+		9FD1E6E21A5169230009A6C5 /* PlayerProtocol.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerProtocol.cpp; sourceTree = "<group>"; };
+		9FD1E6E31A5169230009A6C5 /* PlayerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerProtocol.h; sourceTree = "<group>"; };
+		9FD1E6E41A5169230009A6C5 /* PlayerServiceProtocol.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerServiceProtocol.cpp; sourceTree = "<group>"; };
+		9FD1E6E51A5169230009A6C5 /* PlayerServiceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerServiceProtocol.h; sourceTree = "<group>"; };
+		9FD1E6E61A5169230009A6C5 /* PlayerSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerSettings.cpp; sourceTree = "<group>"; };
+		9FD1E6E71A5169230009A6C5 /* PlayerSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerSettings.h; sourceTree = "<group>"; };
+		9FD1E6E81A5169230009A6C5 /* PlayerTaskServiceProtocol.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerTaskServiceProtocol.cpp; sourceTree = "<group>"; };
+		9FD1E6E91A5169230009A6C5 /* PlayerTaskServiceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerTaskServiceProtocol.h; sourceTree = "<group>"; };
+		9FD1E6EA1A5169230009A6C5 /* PlayerUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerUtils.cpp; sourceTree = "<group>"; };
+		9FD1E6EB1A5169230009A6C5 /* PlayerUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerUtils.h; sourceTree = "<group>"; };
+		A922753D1517C094001B78AA /* jstest iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "jstest iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A92275411517C094001B78AA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A92275431517C094001B78AA /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		A92275451517C094001B78AA /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -389,7 +462,6 @@
 		C03780EA18BEE0E400FE4F13 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = ../../../src; sourceTree = "<group>"; };
 		C037820118BF76AF00FE4F13 /* cocos2d_js_bindings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_js_bindings.xcodeproj; path = "../../cocos2d-x/cocos/scripting/js-bindings/proj.ios_mac/cocos2d_js_bindings.xcodeproj"; sourceTree = "<group>"; };
 		C03C8B4818A770DD00723415 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		C03C8B4918A770DD00723415 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		C05D1C161923467600B808A4 /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = config.json; path = ../../../config.json; sourceTree = "<group>"; };
 		C06C37861918E81100617BED /* ConfigParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConfigParser.cpp; sourceTree = "<group>"; };
 		C06C37871918E81100617BED /* ConfigParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigParser.h; sourceTree = "<group>"; };
@@ -451,6 +523,7 @@
 		15628F5B15F0F5C2000CF24B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9FD1E6BF1A513AAC0009A6C5 /* lang */,
 				C05D1C161923467600B808A4 /* config.json */,
 				1A1A081B18C9DF05005C6854 /* project.json */,
 				1A6BF21418C9DB5900FB0E1C /* main.js */,
@@ -577,15 +650,98 @@
 		509D4ACA17EBB2BE00697056 /* mac */ = {
 			isa = PBXGroup;
 			children = (
+				9FD1E69D1A51361B0009A6C5 /* service */,
 				C0C2F37218AA0C66003976DA /* SimulatorApp.h */,
 				C0C2F37318AA0C66003976DA /* SimulatorApp.mm */,
 				C03C8B4818A770DD00723415 /* main.m */,
-				C03C8B4918A770DD00723415 /* MainMenu.xib */,
+				9FD1E6BB1A51362E0009A6C5 /* MainMenu.xib */,
 				509D4ACB17EBB2BE00697056 /* Icon.icns */,
 				509D4ACC17EBB2BE00697056 /* Info.plist */,
 				509D4ACE17EBB2BE00697056 /* Prefix.pch */,
 			);
 			path = mac;
+			sourceTree = "<group>";
+		};
+		9FD1E69D1A51361B0009A6C5 /* service */ = {
+			isa = PBXGroup;
+			children = (
+				9FD1E69E1A51361B0009A6C5 /* ConsoleWindow.xib */,
+				9FD1E69F1A51361B0009A6C5 /* ConsoleWindowController.h */,
+				9FD1E6A01A51361B0009A6C5 /* ConsoleWindowController.m */,
+				9FD1E6A11A51361B0009A6C5 /* DeviceEx-mac.mm */,
+				9FD1E6A21A51361B0009A6C5 /* openudid */,
+				9FD1E6A51A51361B0009A6C5 /* PlayerEditBoxServiceMac.h */,
+				9FD1E6A61A51361B0009A6C5 /* PlayerEditBoxServiceMac.mm */,
+				9FD1E6A71A51361B0009A6C5 /* PlayerFileDialogServiceMac.h */,
+				9FD1E6A81A51361B0009A6C5 /* PlayerFileDialogServiceMac.mm */,
+				9FD1E6A91A51361B0009A6C5 /* PlayerMac.h */,
+				9FD1E6AA1A51361B0009A6C5 /* PlayerMac.mm */,
+				9FD1E6AB1A51361B0009A6C5 /* PlayerMenuServiceMac.h */,
+				9FD1E6AC1A51361B0009A6C5 /* PlayerMenuServiceMac.mm */,
+				9FD1E6AD1A51361B0009A6C5 /* PlayerMessageBoxServiceMac.h */,
+				9FD1E6AE1A51361B0009A6C5 /* PlayerMessageBoxServiceMac.mm */,
+				9FD1E6AF1A51361B0009A6C5 /* PlayerTaskServiceMac.h */,
+				9FD1E6B01A51361B0009A6C5 /* PlayerTaskServiceMac.mm */,
+			);
+			path = service;
+			sourceTree = "<group>";
+		};
+		9FD1E6A21A51361B0009A6C5 /* openudid */ = {
+			isa = PBXGroup;
+			children = (
+				9FD1E6A31A51361B0009A6C5 /* OpenUDIDMac.h */,
+				9FD1E6A41A51361B0009A6C5 /* OpenUDIDMac.m */,
+			);
+			path = openudid;
+			sourceTree = "<group>";
+		};
+		9FD1E6C91A5169180009A6C5 /* ProjectConfig */ = {
+			isa = PBXGroup;
+			children = (
+				9FD1E6CA1A5169180009A6C5 /* ProjectConfig.cpp */,
+				9FD1E6CB1A5169180009A6C5 /* ProjectConfig.h */,
+				9FD1E6CC1A5169180009A6C5 /* SimulatorConfig.cpp */,
+				9FD1E6CD1A5169180009A6C5 /* SimulatorConfig.h */,
+			);
+			path = ProjectConfig;
+			sourceTree = "<group>";
+		};
+		9FD1E6D21A5169230009A6C5 /* network */ = {
+			isa = PBXGroup;
+			children = (
+				9FD1E6D31A5169230009A6C5 /* CCHTTPRequest.cpp */,
+				9FD1E6D41A5169230009A6C5 /* CCHTTPRequest.h */,
+				9FD1E6D51A5169230009A6C5 /* CCHTTPRequestDelegate.h */,
+			);
+			path = network;
+			sourceTree = "<group>";
+		};
+		9FD1E6D61A5169230009A6C5 /* service */ = {
+			isa = PBXGroup;
+			children = (
+				9FD1E6D71A5169230009A6C5 /* AppEvent.cpp */,
+				9FD1E6D81A5169230009A6C5 /* AppEvent.h */,
+				9FD1E6D91A5169230009A6C5 /* AppLang.cpp */,
+				9FD1E6DA1A5169230009A6C5 /* AppLang.h */,
+				9FD1E6DB1A5169230009A6C5 /* DeviceEx.h */,
+				9FD1E6DC1A5169230009A6C5 /* PlayerEditBoxServiceProtocol.h */,
+				9FD1E6DD1A5169230009A6C5 /* PlayerFileDialogServiceProtocol.h */,
+				9FD1E6DE1A5169230009A6C5 /* PlayerMacros.h */,
+				9FD1E6DF1A5169230009A6C5 /* PlayerMenuServiceProtocol.cpp */,
+				9FD1E6E01A5169230009A6C5 /* PlayerMenuServiceProtocol.h */,
+				9FD1E6E11A5169230009A6C5 /* PlayerMessageBoxServiceProtocol.h */,
+				9FD1E6E21A5169230009A6C5 /* PlayerProtocol.cpp */,
+				9FD1E6E31A5169230009A6C5 /* PlayerProtocol.h */,
+				9FD1E6E41A5169230009A6C5 /* PlayerServiceProtocol.cpp */,
+				9FD1E6E51A5169230009A6C5 /* PlayerServiceProtocol.h */,
+				9FD1E6E61A5169230009A6C5 /* PlayerSettings.cpp */,
+				9FD1E6E71A5169230009A6C5 /* PlayerSettings.h */,
+				9FD1E6E81A5169230009A6C5 /* PlayerTaskServiceProtocol.cpp */,
+				9FD1E6E91A5169230009A6C5 /* PlayerTaskServiceProtocol.h */,
+				9FD1E6EA1A5169230009A6C5 /* PlayerUtils.cpp */,
+				9FD1E6EB1A5169230009A6C5 /* PlayerUtils.h */,
+			);
+			path = service;
 			sourceTree = "<group>";
 		};
 		A92275321517C094001B78AA = {
@@ -700,6 +856,9 @@
 		D4545214156E28EF00887EB5 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9FD1E6D21A5169230009A6C5 /* network */,
+				9FD1E6D61A5169230009A6C5 /* service */,
+				9FD1E6C91A5169180009A6C5 /* ProjectConfig */,
 				AB9079CD19E917450033128B /* CodeIDESupport.h */,
 				C00FD4A91938628E00C6382D /* runtime */,
 				C033B522191B36AE00D06937 /* VisibleRect.cpp */,
@@ -780,6 +939,8 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
+				"zh-Hans",
 			);
 			mainGroup = A92275321517C094001B78AA;
 			productRefGroup = A922753E1517C094001B78AA /* Products */;
@@ -894,14 +1055,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FD1E6C01A513AAC0009A6C5 /* lang in Resources */,
 				1AC22EDE18CA0E11007112B9 /* project.json in Resources */,
+				9FD1E6B11A51361B0009A6C5 /* ConsoleWindow.xib in Resources */,
 				1AD7E0A918C9DBE3004817A6 /* main.js in Resources */,
 				C05D1C181923467600B808A4 /* config.json in Resources */,
 				3E12D1A61957FA03002FF0FD /* script in Resources */,
 				C0799CBA18BAE62000E9C828 /* res in Resources */,
-				C03C8B4C18A770DD00723415 /* MainMenu.xib in Resources */,
 				509D4ACF17EBB2BE00697056 /* Icon.icns in Resources */,
 				C03780EC18BEE0E400FE4F13 /* src in Resources */,
+				9FD1E6BD1A51362E0009A6C5 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -957,34 +1120,54 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FD1E6B61A51361B0009A6C5 /* PlayerFileDialogServiceMac.mm in Sources */,
 				3E12D1E61957FB18002FF0FD /* common.cc in Sources */,
+				9FD1E6B51A51361B0009A6C5 /* PlayerEditBoxServiceMac.mm in Sources */,
+				9FD1E6EE1A5169230009A6C5 /* AppLang.cpp in Sources */,
+				9FD1E6B21A51361B0009A6C5 /* ConsoleWindowController.m in Sources */,
 				3E12D1E81957FB18002FF0FD /* once.cc in Sources */,
+				9FD1E6ED1A5169230009A6C5 /* AppEvent.cpp in Sources */,
 				3E12D1E01957FB18002FF0FD /* message_lite.cc in Sources */,
 				3E12D1D61957FB18002FF0FD /* extension_set.cc in Sources */,
 				C00FD4B51938628E00C6382D /* PlayDisable_png.cpp in Sources */,
 				AB9079D519E931D80033128B /* ConsoleCommand.cpp in Sources */,
 				3E12D1EA1957FB18002FF0FD /* stringprintf.cc in Sources */,
 				C06C37891918E81100617BED /* ConfigParser.cpp in Sources */,
+				9FD1E6B71A51361B0009A6C5 /* PlayerMac.mm in Sources */,
 				509D4A8117EBB24E00697056 /* AppDelegate.cpp in Sources */,
+				9FD1E6BA1A51361B0009A6C5 /* PlayerTaskServiceMac.mm in Sources */,
 				C00FD4B71938628E00C6382D /* PlayEnable_png.cpp in Sources */,
+				9FD1E6F31A5169230009A6C5 /* PlayerTaskServiceProtocol.cpp in Sources */,
 				C00FD4B91938628E00C6382D /* Portrait_png.cpp in Sources */,
 				C00FD4BD1938628E00C6382D /* Shine_png.cpp in Sources */,
+				9FD1E6EC1A5169230009A6C5 /* CCHTTPRequest.cpp in Sources */,
 				C0C2F37418AA0C66003976DA /* SimulatorApp.mm in Sources */,
+				9FD1E6B41A51361B0009A6C5 /* OpenUDIDMac.m in Sources */,
 				C026DCCA18928A2400B3EDE8 /* Runtime_ios-mac.mm in Sources */,
 				3E12D1DC1957FB18002FF0FD /* zero_copy_stream.cc in Sources */,
 				ABCA93C819E65B1C007FB844 /* FileServer.cpp in Sources */,
 				3E12D1E41957FB18002FF0FD /* atomicops_internals_x86_msvc.cc in Sources */,
 				3E12D1DE1957FB18002FF0FD /* zero_copy_stream_impl_lite.cc in Sources */,
+				9FD1E6F11A5169230009A6C5 /* PlayerServiceProtocol.cpp in Sources */,
+				9FD1E6F01A5169230009A6C5 /* PlayerProtocol.cpp in Sources */,
 				3E12D1AA1957FB0E002FF0FD /* Protos.pb.cc in Sources */,
 				C033B525191B36AE00D06937 /* VisibleRect.cpp in Sources */,
 				ABCA93D019E6712A007FB844 /* ConnectWaitLayer.cpp in Sources */,
+				9FD1E6EF1A5169230009A6C5 /* PlayerMenuServiceProtocol.cpp in Sources */,
 				3E12D1E21957FB18002FF0FD /* repeated_field.cc in Sources */,
+				9FD1E6B91A51361B0009A6C5 /* PlayerMessageBoxServiceMac.mm in Sources */,
+				9FD1E6F41A5169230009A6C5 /* PlayerUtils.cpp in Sources */,
+				9FD1E6B31A51361B0009A6C5 /* DeviceEx-mac.mm in Sources */,
+				9FD1E6CF1A5169180009A6C5 /* ProjectConfig.cpp in Sources */,
 				3E12D1D81957FB18002FF0FD /* generated_message_util.cc in Sources */,
 				C00FD4BB1938628E00C6382D /* Runtime.cpp in Sources */,
+				9FD1E6D11A5169180009A6C5 /* SimulatorConfig.cpp in Sources */,
 				3E12D1DA1957FB18002FF0FD /* coded_stream.cc in Sources */,
 				C03C8B4B18A770DD00723415 /* main.m in Sources */,
 				C00FD4B31938628E00C6382D /* Landscape_png.cpp in Sources */,
+				9FD1E6F21A5169230009A6C5 /* PlayerSettings.cpp in Sources */,
 				3E12D1EC1957FB18002FF0FD /* wire_format_lite.cc in Sources */,
+				9FD1E6B81A51361B0009A6C5 /* PlayerMenuServiceMac.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1004,8 +1187,10 @@
 				3E12D1DD1957FB18002FF0FD /* zero_copy_stream_impl_lite.cc in Sources */,
 				C00FD4B61938628E00C6382D /* PlayEnable_png.cpp in Sources */,
 				3E12D1A91957FB0E002FF0FD /* Protos.pb.cc in Sources */,
+				9FD1E6CE1A5169180009A6C5 /* ProjectConfig.cpp in Sources */,
 				3E12D1E31957FB18002FF0FD /* atomicops_internals_x86_msvc.cc in Sources */,
 				3E12D1E11957FB18002FF0FD /* repeated_field.cc in Sources */,
+				9FD1E6D01A5169180009A6C5 /* SimulatorConfig.cpp in Sources */,
 				C00FD4B41938628E00C6382D /* PlayDisable_png.cpp in Sources */,
 				ABCA93CF19E6712A007FB844 /* ConnectWaitLayer.cpp in Sources */,
 				C00FD4BC1938628E00C6382D /* Shine_png.cpp in Sources */,
@@ -1079,6 +1264,18 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		9FD1E6BB1A51362E0009A6C5 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9FD1E6BC1A51362E0009A6C5 /* Base */,
+				9FD1E6BE1A5136370009A6C5 /* zh-Hans */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		509D4AA817EBB24E00697056 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1098,7 +1295,11 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../Classes/protobuf-lite";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../Classes/protobuf-lite",
+					"$(SRCROOT)/../Classes/service",
+					"$(SRCROOT)/../Classes",
+				);
 				INFOPLIST_FILE = mac/Info.plist;
 				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
@@ -1123,7 +1324,11 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../Classes/protobuf-lite";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../Classes/protobuf-lite",
+					"$(SRCROOT)/../Classes/service",
+					"$(SRCROOT)/../Classes",
+				);
 				INFOPLIST_FILE = mac/Info.plist;
 				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
@@ -1195,14 +1400,18 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../Classes/protobuf-lite";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../Classes/protobuf-lite",
+					"$(SRCROOT)/../Classes/service",
+					"$(SRCROOT)/../Classes",
+				);
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../cocos2d-x/cocos $(SRCROOT)/../../cocos2d-x/cocos/platform/ios $(SRCROOT)/../../cocos2d-x/external/spidermonkey/include/ios $(SRCROOT)/../../cocos2d-x/plugin/jsbindings/auto $(SRCROOT)/../../cocos2d-x/plugin/jsbindings/manual";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../cocos2d-x/cocos $(SRCROOT)/../../cocos2d-x/cocos/platform/ios $(SRCROOT)/../../cocos2d-x/external/spidermonkey/include/ios $(SRCROOT)/../../cocos2d-x/plugin/jsbindings/auto $(SRCROOT)/../../cocos2d-x/plugin/jsbindings/manual $(SRCROOT)/../../cocos2d-x/external/curl/include/ios";
 				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Debug;
@@ -1221,14 +1430,18 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../Classes/protobuf-lite";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../Classes/protobuf-lite",
+					"$(SRCROOT)/../Classes/service",
+					"$(SRCROOT)/../Classes",
+				);
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../cocos2d-x/cocos $(SRCROOT)/../../cocos2d-x/cocos/platform/ios $(SRCROOT)/../../cocos2d-x/external/spidermonkey/include/ios $(SRCROOT)/../../cocos2d-x/plugin/jsbindings/auto $(SRCROOT)/../../cocos2d-x/plugin/jsbindings/manual";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../cocos2d-x/cocos $(SRCROOT)/../../cocos2d-x/cocos/platform/ios $(SRCROOT)/../../cocos2d-x/external/spidermonkey/include/ios $(SRCROOT)/../../cocos2d-x/plugin/jsbindings/auto $(SRCROOT)/../../cocos2d-x/plugin/jsbindings/manual $(SRCROOT)/../../cocos2d-x/external/curl/include/ios";
 				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Release;
