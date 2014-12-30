@@ -43,6 +43,10 @@ using namespace CocosDenshion;
 
 AppDelegate::AppDelegate()
 {
+#if (CC_TARGET_PLATFORM != CC_PLATFORM_WIN32) && (CC_TARGET_PLATFORM != CC_PLATFORM_MAC)
+    auto config = ConfigParser::getInstance();
+    _project.setScriptFile(config->getEntryFile());
+#endif
 }
 
 AppDelegate::~AppDelegate()
