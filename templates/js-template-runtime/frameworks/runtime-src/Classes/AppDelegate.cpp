@@ -53,10 +53,12 @@ AppDelegate::~AppDelegate()
 {
 	SimpleAudioEngine::end();
     ScriptEngineManager::destroyInstance();
-#if (CC_CODE_IDE_DEBUG_SUPPORT > 0)
-	// NOTE:Please don't remove this call if you want to debug with Cocos Code IDE
-	endRuntime();
-#endif
+    
+    if (_project.getDebuggerType() != kCCRuntimeDebuggerNone)
+    {
+        // NOTE:Please don't remove this call if you want to debug with Cocos Code IDE
+        endRuntime();
+    }
 
 	ConfigParser::purge();
 }

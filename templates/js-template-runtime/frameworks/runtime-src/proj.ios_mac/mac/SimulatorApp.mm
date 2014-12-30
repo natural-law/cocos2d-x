@@ -233,6 +233,10 @@ static void glfwDropFunc(GLFWwindow *window, int count, const char **files)
     {
         [[NSApplication sharedApplication] terminate:self];
     }
+    else
+    {
+        NSLog(@"RELAUNCH: %@", args);
+    }
 }
 
 - (void) relaunch
