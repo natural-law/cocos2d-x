@@ -1,8 +1,8 @@
 {
-    "version":"v3-deps-33",
-    "zip_file_size":"87419231",
+    "version":"v4-deps-7",
+    "zip_file_size":"119077597",
     "repo_name":"cocos2d-x-3rd-party-libs-bin",
-    "repo_parent":"https://github.com/cocos2d/",
+    "repo_parent":"https://github.com/natural-law/",
     "move_dirs":{
         "fbx-conv":"tools"
     }

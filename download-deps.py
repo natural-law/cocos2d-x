@@ -317,6 +317,12 @@ def main():
     installer = CocosZipInstaller(workpath, os.path.join(runtime_path, 'config.json'), os.path.join(runtime_path, 'version.json'))
     installer.run(workpath, runtime_path, opts.remove_downloaded, opts.force_update, opts.download_only)
 
+    print("=======================================================")
+    print("==> Prepare to download js runtime binaries")
+    runtime_path = os.path.join(workpath, 'templates', 'js-template-runtime', 'runtime')
+    installer = CocosZipInstaller(workpath, os.path.join(runtime_path, 'config.json'), os.path.join(runtime_path, 'version.json'))
+    installer.run(workpath, runtime_path, opts.remove_downloaded, opts.force_update, opts.download_only)
+
 # -------------- main --------------
 if __name__ == '__main__':
     try:
