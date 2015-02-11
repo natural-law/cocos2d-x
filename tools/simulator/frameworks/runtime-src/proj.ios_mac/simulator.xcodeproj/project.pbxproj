@@ -566,6 +566,9 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				TargetAttributes = {
+					5023812617EBBCE400990C9B = {
+						DevelopmentTeam = U7E7529TA5;
+					};
 					F293B3C715EB7BE500256477 = {
 						DevelopmentTeam = MDDB52YB8L;
 					};
@@ -810,6 +813,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_IDENTITY = "Developer ID Application: CocoaChina (U7E7529TA5)";
 				COMBINE_HIDPI_IMAGES = YES;
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -847,6 +851,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_IDENTITY = "Developer ID Application: CocoaChina (U7E7529TA5)";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = mac/Prefix.pch;
@@ -942,7 +947,7 @@
 					armv7,
 					arm64,
 				);
-				CODE_SIGN_IDENTITY = "iPhone Developer: wang zhe (UTF8Q753X4)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Xiamen YAJI Software Co.,LTD";
 				COMPRESS_PNG_FILES = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -975,7 +980,7 @@
 					armv7,
 					arm64,
 				);
-				CODE_SIGN_IDENTITY = "iPhone Developer: wang zhe (UTF8Q753X4)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Xiamen YAJI Software Co.,LTD";
 				COMPRESS_PNG_FILES = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ios/Prefix.pch;
