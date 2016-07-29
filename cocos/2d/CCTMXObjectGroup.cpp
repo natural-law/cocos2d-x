@@ -143,6 +143,7 @@ void TMXObjectImage::_initPosWithMapInfo(TMXMapInfo* mapInfo)
                                 tileSize.height / 2 * (mapSize.height * 2 - posIdx.x - posIdx.y));
                 setPosition(CC_POINT_PIXELS_TO_POINTS(pos));
             }
+            break;
         case TMXOrientationHex:
             {
                 setAnchorPoint(Vec2(0,0));
@@ -213,13 +214,19 @@ void TMXObjectShape::_initShape(const ValueMap& objectInfo, TMXMapInfo* mapInfo)
 void TMXObjectShape::_drawRect(const Vec2& originPos)
 {
     if (TMXOrientationHex == _mapOrientation || TMXOrientationOrtho == _mapOrientation) {
-        Size objSizeInPoints = CC_SIZE_PIXELS_TO_POINTS(_objectSize);
+        auto objSize = _objectSize;
+        if (objSize.equals(Size(0, 0))) {
+            objSize = Size(20, 20);
+            setAnchorPoint(Vec2(0.5, 0.5));
+        } else {
+            setAnchorPoint(Vec2(0, 1));
+        }
+        Size objSizeInPoints = CC_SIZE_PIXELS_TO_POINTS(objSize);
         Vec2 bl = Vec2(0, 0);
         Vec2 tr = Vec2(objSizeInPoints.width, objSizeInPoints.height);
         drawRect(bl, tr, _groupColor);
         
-        setContentSize(CC_SIZE_PIXELS_TO_POINTS(_objectSize));
-        setAnchorPoint(Vec2(0, 1));
+        setContentSize(objSizeInPoints);
     } else {
         
     }
@@ -228,7 +235,14 @@ void TMXObjectShape::_drawRect(const Vec2& originPos)
 void TMXObjectShape::_drawEllipse(const Vec2& originPos)
 {
     if (TMXOrientationHex == _mapOrientation || TMXOrientationOrtho == _mapOrientation) {
-        Size objSizeInPoints = CC_SIZE_PIXELS_TO_POINTS(_objectSize);
+        auto objSize = _objectSize;
+        if (objSize.equals(Size(0, 0))) {
+            objSize = Size(20, 20);
+            setAnchorPoint(Vec2(0.5, 0.5));
+        } else {
+            setAnchorPoint(Vec2(0, 1));
+        }
+        Size objSizeInPoints = CC_SIZE_PIXELS_TO_POINTS(objSize);
         
         float scaleX = 1.0, scaleY = 1.0, radius = 0.0;
         Vec2 center = Vec2(objSizeInPoints.width / 2, objSizeInPoints.height / 2);
@@ -241,8 +255,7 @@ void TMXObjectShape::_drawEllipse(const Vec2& originPos)
         }
         drawCircle(center, radius, 0, 50, false, scaleX, scaleY, _groupColor);
         
-        setContentSize(CC_SIZE_PIXELS_TO_POINTS(_objectSize));
-        setAnchorPoint(Vec2(0, 1));
+        setContentSize(objSizeInPoints);
     } else {
         
     }
@@ -250,29 +263,29 @@ void TMXObjectShape::_drawEllipse(const Vec2& originPos)
 
 void TMXObjectShape::_drawPoly(const ValueMap& objectInfo, const Vec2& originPos, bool isPolygon)
 {
-    if (TMXOrientationHex == _mapOrientation || TMXOrientationOrtho == _mapOrientation) {
-        ValueVector pointsData;
-        if (isPolygon)
-            pointsData = objectInfo.at("points").asValueVector();
-        else
-            pointsData = objectInfo.at("polylinePoints").asValueVector();
-        
-        Vec2 * points = new Vec2[pointsData.size()];
-        int idx = 0;
-        float minX = 0, minY = 0, maxX = 0, maxY = 0;
-        for (auto& pointData : pointsData) {
-            auto pointDict = pointData.asValueMap();
-            int x = pointDict["x"].asInt();
-            int y = pointDict["y"].asInt();
-            Vec2 tempPos = CC_POINT_PIXELS_TO_POINTS(Vec2(x, y));
-            points[idx] = Vec2(tempPos.x, -tempPos.y);
-            minX = MIN(minX, tempPos.x);
-            minY = MIN(minY, tempPos.y);
-            maxX = MAX(maxX, tempPos.x);
-            maxY = MAX(maxY, tempPos.y);
-            idx++;
-        }
+    // parse the data
+    ValueVector pointsData;
+    if (isPolygon)
+        pointsData = objectInfo.at("points").asValueVector();
+    else
+        pointsData = objectInfo.at("polylinePoints").asValueVector();
+    
+    Vec2 * points = new Vec2[pointsData.size()];
+    int idx = 0;
+    float minX = 0, minY = 0, maxX = 0, maxY = 0;
+    for (auto& pointData : pointsData) {
+        auto pointDict = pointData.asValueMap();
+        int x = pointDict["x"].asInt();
+        int y = pointDict["y"].asInt();
+        points[idx] = CC_POINT_PIXELS_TO_POINTS(Vec2(x, y));
+        minX = MIN(minX, points[idx].x);
+        minY = MIN(minY, points[idx].y);
+        maxX = MAX(maxX, points[idx].x);
+        maxY = MAX(maxY, points[idx].y);
+        idx++;
+    }
 
+    if (TMXOrientationHex == _mapOrientation || TMXOrientationOrtho == _mapOrientation) {
         // set the content size & anchor point
         float width = maxX - minX, height = maxY - minY;
         setContentSize(Size(width, height));
@@ -280,7 +293,7 @@ void TMXObjectShape::_drawPoly(const ValueMap& objectInfo, const Vec2& originPos
 
         // correct the points data
         for (int i = 0; i < idx; i++) {
-            points[i] = Vec2(points[i].x - minX, points[i].y + maxY);
+            points[i] = Vec2(points[i].x - minX, -points[i].y + maxY);
         }
         drawPoly(points, idx, isPolygon, _groupColor);
         delete [] points;
@@ -366,7 +379,7 @@ void TMXObjectGroup::_initGroup(TMXObjectGroupInfo* groupInfo, TMXMapInfo* mapIn
         setContentSize(CC_SIZE_PIXELS_TO_POINTS(Size(mapSize.width * tileSize.width, mapSize.height * tileSize.height)));
     }
     setAnchorPoint(Vec2(0, 0));
-    setPosition(CC_POINT_PIXELS_TO_POINTS(Vec2(_positionOffset.x, -_positionOffset.y)));
+    setPosition(Vec2(_positionOffset.x, -_positionOffset.y));
     setVisible(groupInfo->_visible);
     
     // create objects children

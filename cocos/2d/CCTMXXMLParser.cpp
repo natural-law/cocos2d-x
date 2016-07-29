@@ -410,7 +410,7 @@ void TMXMapInfo::startElement(void *ctx, const char *name, const char **atts)
         Vec2 positionOffset;
         positionOffset.x = attributeDict["offsetx"].asFloat();
         positionOffset.y = attributeDict["offsety"].asFloat();
-        objectGroup->_positionOffset = positionOffset;
+        objectGroup->_positionOffset = CC_POINT_PIXELS_TO_POINTS(positionOffset);
         
         // object group color
         Value& colorValue = attributeDict["color"];
