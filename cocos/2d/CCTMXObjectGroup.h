@@ -96,12 +96,14 @@ protected:
 class CC_DLL TMXObjectImage : public Sprite, public TMXObject
 {
 public:
-    TMXObjectImage(const ValueMap& objectInfo, TMXMapInfo* mapInfo);
+    TMXObjectImage(const ValueMap& objectInfo, TMXMapInfo* mapInfo, const Size& groupSize);
     virtual ~TMXObjectImage();
 
 protected:
     bool _initWithMapInfo(TMXMapInfo* mapInfo);
     void _initPosWithMapInfo(TMXMapInfo* mapInfo);
+    
+    Size _groupSize;
 };
 
 /** @brief TMXObjectShape represents the TMX object shapes.

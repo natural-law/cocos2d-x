@@ -63,8 +63,9 @@ Value TMXObject::getProperty(const std::string& propertyName) const
 }
 
 //implementation TMXObjectImage
-TMXObjectImage::TMXObjectImage(const ValueMap& objectInfo, TMXMapInfo* mapInfo)
+TMXObjectImage::TMXObjectImage(const ValueMap& objectInfo, TMXMapInfo* mapInfo, const Size& groupSize)
 : TMXObject(objectInfo)
+, _groupSize(groupSize)
 {
     _initWithMapInfo(mapInfo);
 }
@@ -132,8 +133,13 @@ void TMXObjectImage::_initPosWithMapInfo(TMXMapInfo* mapInfo)
     auto tileSize = mapInfo->getTileSize();
     switch (mapOri) {
         case TMXOrientationOrtho:
-            setAnchorPoint(Vec2(0, 0));
-            setPosition(CC_POINT_PIXELS_TO_POINTS(Vec2(_offset.x, mapSize.height * tileSize.height - _offset.y)));
+        case TMXOrientationHex:
+        case TMXOrientationStaggered:
+            {
+                Vec2 offsetInPoints = CC_POINT_PIXELS_TO_POINTS(_offset);
+                setAnchorPoint(Vec2(0, 0));
+                setPosition(Vec2(offsetInPoints.x, _groupSize.height - offsetInPoints.y));
+            }
             break;
         case TMXOrientationIso:
             {
@@ -144,19 +150,6 @@ void TMXObjectImage::_initPosWithMapInfo(TMXMapInfo* mapInfo)
                 setPosition(CC_POINT_PIXELS_TO_POINTS(pos));
             }
             break;
-        case TMXOrientationHex:
-            {
-                setAnchorPoint(Vec2(0,0));
-                auto x = _offset.x;
-                float y = 0;
-                if (mapInfo->getStaggerAxis() == TMXStaggerAxis_X) {
-                    y = tileSize.height * (mapSize.height + 0.5) - _offset.y;
-                }
-                else if (mapInfo->getStaggerAxis() == TMXStaggerAxis_Y) {
-                    y = (tileSize.height + mapInfo->getHexSideLength()) * (int)(mapSize.height / 2) + tileSize.height * ((int)mapSize.height % 2) - _offset.y;
-                }
-                setPosition(CC_POINT_PIXELS_TO_POINTS(Vec2(x, y)));
-            }
         default:
             break;
     }
@@ -183,7 +176,7 @@ void TMXObjectShape::_initShape(const ValueMap& objectInfo)
     DrawNode::init();
     
     Vec2 originPos;
-    if (TMXOrientationHex == _mapOrientation || TMXOrientationOrtho == _mapOrientation) {
+    if (TMXOrientationIso != _mapOrientation) {
         Vec2 startPos = Vec2(0, _groupSize.height);
         Vec2 offsetInPoints = CC_POINT_PIXELS_TO_POINTS(_offset);
         originPos = Vec2(startPos.x + offsetInPoints.x, startPos.y - offsetInPoints.y);
@@ -223,7 +216,7 @@ Vec2 TMXObjectShape::_getPosByOffset(const Vec2& offset)
 
 void TMXObjectShape::_drawRect()
 {
-    if (TMXOrientationHex == _mapOrientation || TMXOrientationOrtho == _mapOrientation) {
+    if (TMXOrientationIso != _mapOrientation) {
         auto objSize = _objectSize;
         if (objSize.equals(Size::ZERO)) {
             objSize = Size(20, 20);
@@ -270,7 +263,7 @@ void TMXObjectShape::_drawRect()
 
 void TMXObjectShape::_drawEllipse()
 {
-    if (TMXOrientationHex == _mapOrientation || TMXOrientationOrtho == _mapOrientation) {
+    if (TMXOrientationIso != _mapOrientation) {
         auto objSize = _objectSize;
         if (objSize.equals(Size::ZERO)) {
             objSize = Size(20, 20);
@@ -376,7 +369,7 @@ void TMXObjectShape::_drawPoly(const ValueMap& objectInfo, const Vec2& originPos
         idx++;
     }
 
-    if (TMXOrientationHex == _mapOrientation || TMXOrientationOrtho == _mapOrientation) {
+    if (TMXOrientationIso != _mapOrientation) {
         // set the content size & anchor point
         float width = maxX - minX, height = maxY - minY;
         setContentSize(CC_SIZE_PIXELS_TO_POINTS(Size(width, height)));
@@ -478,7 +471,20 @@ void TMXObjectGroup::_initGroup(TMXObjectGroupInfo* groupInfo, TMXMapInfo* mapIn
             height = (tileSize.height + mapInfo->getHexSideLength()) * (int)(mapSize.height / 2) + tileSize.height * ((int)mapSize.height % 2);
         }
         setContentSize(CC_SIZE_PIXELS_TO_POINTS(Size(width, height)));
-    } else {
+    }
+    else if (mapInfo->getOrientation() == TMXOrientationStaggered)
+    {
+        float width, height = 0;
+        if (mapInfo->getStaggerAxis() == TMXStaggerAxis_X) {
+            height = tileSize.height * (mapSize.height + 0.5);
+            width = (tileSize.width / 2) * (mapSize.width + 1);
+        } else {
+            width = tileSize.width * (mapSize.width + 0.5);
+            height = (tileSize.height / 2) * (mapSize.height + 1);
+        }
+        setContentSize(CC_SIZE_PIXELS_TO_POINTS(Size(width, height)));
+    }
+    else {
         setContentSize(CC_SIZE_PIXELS_TO_POINTS(Size(mapSize.width * tileSize.width, mapSize.height * tileSize.height)));
     }
     setAnchorPoint(Vec2(0, 0));
@@ -492,7 +498,7 @@ void TMXObjectGroup::_initGroup(TMXObjectGroupInfo* groupInfo, TMXMapInfo* mapIn
         auto objectInfo = object.asValueMap();
         Node* obj = nullptr;
         if (objectInfo["type"].asInt() == TMXObjectTypeImage) {
-            obj = new TMXObjectImage(objectInfo, mapInfo);
+            obj = new TMXObjectImage(objectInfo, mapInfo, getContentSize());
         } else {
             obj = new TMXObjectShape(objectInfo, mapInfo, getContentSize(), groupInfo->_color);
         }
