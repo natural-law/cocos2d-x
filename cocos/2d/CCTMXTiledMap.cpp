@@ -183,7 +183,7 @@ void TMXTiledMap::buildWithMapInfo(TMXMapInfo* mapInfo)
     auto& children = mapInfo->getAllChildren();
     for (const auto &childInfo : children) {
         TMXLayerInfo* layerInfo = dynamic_cast<TMXLayerInfo*>(childInfo);
-        if (layerInfo) {
+        if (layerInfo && layerInfo->_visible) {
             TMXLayer *child = parseLayer(layerInfo, mapInfo);
             if (child == nullptr) {
                 idx++;

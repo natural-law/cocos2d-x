@@ -114,15 +114,21 @@ public:
     virtual ~TMXObjectShape();
 
 protected:
-    void _initShape(const ValueMap& objectInfo, TMXMapInfo* mapInfo);
+    void _initShape(const ValueMap& objectInfo);
 
-    void _drawRect(const Vec2& originPos);
-    void _drawEllipse(const Vec2& originPos);
+    void _drawRect();
+    void _drawEllipse();
     void _drawPoly(const ValueMap& objectInfo, const Vec2& originPos, bool isPolygon);
+    
+    // internal methods for iso map
+    Vec2 _getPosByOffset(const Vec2& offset);
     
     int _mapOrientation;
     Size _groupSize;
     Color4F _groupColor;
+
+private:
+    TMXMapInfo* _mapInfo;
 };
 
 /**

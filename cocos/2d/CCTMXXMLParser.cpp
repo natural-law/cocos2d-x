@@ -415,7 +415,7 @@ void TMXMapInfo::startElement(void *ctx, const char *name, const char **atts)
         // object group color
         Value& colorValue = attributeDict["color"];
         if (colorValue.isNull()) {
-            objectGroup->_color = Color3B(0, 0, 0);
+            objectGroup->_color = Color3B(255, 255, 255);
         } else {
             std::string colorStr = colorValue.asString();
             auto startPos = colorStr.find("#");
@@ -647,13 +647,13 @@ void TMXMapInfo::startElement(void *ctx, const char *name, const char **atts)
                 // set x
                 if (std::getline(pointStream, xStr, ','))
                 {
-                    pointDict["x"] = Value(atoi(xStr.c_str()));
+                    pointDict["x"] = Value(atof(xStr.c_str()));
                 }
 
                 // set y
                 if (std::getline(pointStream, yStr, ','))
                 {
-                    pointDict["y"] = Value(atoi(yStr.c_str()));
+                    pointDict["y"] = Value(atof(yStr.c_str()));
                 }
                 
                 // add to points array
@@ -691,13 +691,13 @@ void TMXMapInfo::startElement(void *ctx, const char *name, const char **atts)
                 // set x
                 if (std::getline(pointStream, xStr, ','))
                 {
-                    pointDict["x"] = Value(atoi(xStr.c_str()));
+                    pointDict["x"] = Value(atof(xStr.c_str()));
                 }
                 
                 // set y
                 if (std::getline(pointStream, yStr, ','))
                 {
-                    pointDict["y"] = Value(atoi(yStr.c_str()));
+                    pointDict["y"] = Value(atof(yStr.c_str()));
                 }
                 
                 // add to points array

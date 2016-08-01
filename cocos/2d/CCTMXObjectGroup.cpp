@@ -167,17 +167,18 @@ TMXObjectShape::TMXObjectShape(const ValueMap& objectInfo, TMXMapInfo* mapInfo, 
 : TMXObject(objectInfo)
 , DrawNode(1)
 {
+    _mapInfo = mapInfo;
     _mapOrientation = mapInfo->getOrientation();
     _groupSize = groupSize;
     _groupColor = Color4F((float) color.r / 255, (float) color.g / 255, (float) color.b / 255, 1.0);
-    _initShape(objectInfo, mapInfo);
+    _initShape(objectInfo);
 }
 
 TMXObjectShape::~TMXObjectShape() {
     CCLOGINFO("deallocing TMXObjectShape: %p", this);
 }
 
-void TMXObjectShape::_initShape(const ValueMap& objectInfo, TMXMapInfo* mapInfo)
+void TMXObjectShape::_initShape(const ValueMap& objectInfo)
 {
     DrawNode::init();
     
@@ -187,17 +188,17 @@ void TMXObjectShape::_initShape(const ValueMap& objectInfo, TMXMapInfo* mapInfo)
         Vec2 offsetInPoints = CC_POINT_PIXELS_TO_POINTS(_offset);
         originPos = Vec2(startPos.x + offsetInPoints.x, startPos.y - offsetInPoints.y);
     } else {
-        originPos = Vec2(0, 0);
+        originPos = _getPosByOffset(Vec2(0, 0));
     }
     setPosition(originPos);
     setRotation(_objectRotation);
 
     switch (_type) {
         case TMXObjectTypeRect:
-            _drawRect(originPos);
+            _drawRect();
             break;
         case TMXObjectTypeEllipse:
-            _drawEllipse(originPos);
+            _drawEllipse();
             break;
         case TMXObjectTypePolygon:
             _drawPoly(objectInfo, originPos, true);
@@ -211,11 +212,20 @@ void TMXObjectShape::_initShape(const ValueMap& objectInfo, TMXMapInfo* mapInfo)
     setVisible(_objectVisible);
 }
 
-void TMXObjectShape::_drawRect(const Vec2& originPos)
+Vec2 TMXObjectShape::_getPosByOffset(const Vec2& offset)
+{
+    auto mapSize = _mapInfo->getMapSize();
+    auto tileSize = _mapInfo->getTileSize();
+    auto posIdx = Vec2((_offset.x + offset.x) / tileSize.width * 2, (_offset.y + offset.y) / tileSize.height);
+    return CC_POINT_PIXELS_TO_POINTS(Vec2(tileSize.width / 2 * (mapSize.width + posIdx.x - posIdx.y),
+                                     tileSize.height / 2 * (mapSize.height * 2 - posIdx.x - posIdx.y)));
+}
+
+void TMXObjectShape::_drawRect()
 {
     if (TMXOrientationHex == _mapOrientation || TMXOrientationOrtho == _mapOrientation) {
         auto objSize = _objectSize;
-        if (objSize.equals(Size(0, 0))) {
+        if (objSize.equals(Size::ZERO)) {
             objSize = Size(20, 20);
             setAnchorPoint(Vec2(0.5, 0.5));
         } else {
@@ -228,15 +238,41 @@ void TMXObjectShape::_drawRect(const Vec2& originPos)
         
         setContentSize(objSizeInPoints);
     } else {
+        if (_objectSize.equals(Size::ZERO)) {
+            return;
+        }
+
+        auto pos1 = _getPosByOffset(Vec2(0, 0));
+        auto pos2 = _getPosByOffset(Vec2(_objectSize.width, 0));
+        auto pos3 = _getPosByOffset(Vec2(_objectSize.width, _objectSize.height));
+        auto pos4 = _getPosByOffset(Vec2(0, _objectSize.height));
         
+        float width = pos2.x - pos4.x, height = pos1.y - pos3.y;
+        setContentSize(Size(width, height));
+        setAnchorPoint(Vec2((pos1.x - pos4.x) / width, 1));
+
+        auto origin = Vec2(pos4.x, pos3.y);
+        pos1.subtract(origin);
+        pos2.subtract(origin);
+        pos3.subtract(origin);
+        pos4.subtract(origin);
+        if (_objectSize.width > 0) {
+            drawLine(pos1, pos2, _groupColor);
+            drawLine(pos3, pos4, _groupColor);
+        }
+        
+        if (_objectSize.height > 0) {
+            drawLine(pos1, pos4, _groupColor);
+            drawLine(pos3, pos2, _groupColor);
+        }
     }
 }
 
-void TMXObjectShape::_drawEllipse(const Vec2& originPos)
+void TMXObjectShape::_drawEllipse()
 {
     if (TMXOrientationHex == _mapOrientation || TMXOrientationOrtho == _mapOrientation) {
         auto objSize = _objectSize;
-        if (objSize.equals(Size(0, 0))) {
+        if (objSize.equals(Size::ZERO)) {
             objSize = Size(20, 20);
             setAnchorPoint(Vec2(0.5, 0.5));
         } else {
@@ -257,7 +293,62 @@ void TMXObjectShape::_drawEllipse(const Vec2& originPos)
         
         setContentSize(objSizeInPoints);
     } else {
+        if (_objectSize.equals(Size::ZERO)) {
+            return;
+        }
+
+        // draw the rect
+        auto pos1 = _getPosByOffset(Vec2(0, 0));
+        auto pos2 = _getPosByOffset(Vec2(_objectSize.width, 0));
+        auto pos3 = _getPosByOffset(Vec2(_objectSize.width, _objectSize.height));
+        auto pos4 = _getPosByOffset(Vec2(0, _objectSize.height));
         
+        float width = pos2.x - pos4.x, height = pos1.y - pos3.y;
+        setContentSize(Size(width, height));
+        setAnchorPoint(Vec2((pos1.x - pos4.x) / width, 1));
+        
+        auto origin = Vec2(pos4.x, pos3.y);
+        pos1.subtract(origin);
+        pos2.subtract(origin);
+        pos3.subtract(origin);
+        pos4.subtract(origin);
+        if (_objectSize.width > 0) {
+            drawLine(pos1, pos2, _groupColor);
+            drawLine(pos3, pos4, _groupColor);
+        }
+        
+        if (_objectSize.height > 0) {
+            drawLine(pos1, pos4, _groupColor);
+            drawLine(pos3, pos2, _groupColor);
+        }
+
+        // add a drawnode to draw the ellipse
+        Size objSizeInPoints = CC_SIZE_PIXELS_TO_POINTS(_objectSize);
+        Vec2 center = _getPosByOffset(Vec2(_objectSize.width / 2, _objectSize.height / 2));
+        center.subtract(origin);
+
+        auto ellipseNode = DrawNode::create(_lineWidth);
+        ellipseNode->setContentSize(Size(width, height));
+        ellipseNode->setAnchorPoint(Vec2(0.5, 0.5));
+        ellipseNode->setPosition(center);
+        addChild(ellipseNode);
+        
+        float scaleX = 1.0, scaleY = 1.0, radius = 0.0;
+        if (objSizeInPoints.width > objSizeInPoints.height) {
+            scaleX = objSizeInPoints.width / objSizeInPoints.height;
+            radius = objSizeInPoints.height / 2;
+        } else {
+            scaleY = objSizeInPoints.height / objSizeInPoints.width;
+            radius = objSizeInPoints.width / 2;
+        }
+        auto tileSize = _mapInfo->getTileSize();
+        float rotateDegree = atan(tileSize.width / tileSize.height);
+        radius /= sin(rotateDegree);
+        ellipseNode->drawCircle(center, radius, 0, 50, false, scaleX, scaleY, _groupColor);
+        
+        // should rotate the ellipse
+        ellipseNode->setRotationSkewX(CC_RADIANS_TO_DEGREES(rotateDegree));
+        ellipseNode->setRotationSkewY(90 - CC_RADIANS_TO_DEGREES(rotateDegree));
     }
 }
 
@@ -275,9 +366,9 @@ void TMXObjectShape::_drawPoly(const ValueMap& objectInfo, const Vec2& originPos
     float minX = 0, minY = 0, maxX = 0, maxY = 0;
     for (auto& pointData : pointsData) {
         auto pointDict = pointData.asValueMap();
-        int x = pointDict["x"].asInt();
-        int y = pointDict["y"].asInt();
-        points[idx] = CC_POINT_PIXELS_TO_POINTS(Vec2(x, y));
+        float x = pointDict["x"].asFloat();
+        float y = pointDict["y"].asFloat();
+        points[idx] = Vec2(x, y);
         minX = MIN(minX, points[idx].x);
         minY = MIN(minY, points[idx].y);
         maxX = MAX(maxX, points[idx].x);
@@ -288,18 +379,30 @@ void TMXObjectShape::_drawPoly(const ValueMap& objectInfo, const Vec2& originPos
     if (TMXOrientationHex == _mapOrientation || TMXOrientationOrtho == _mapOrientation) {
         // set the content size & anchor point
         float width = maxX - minX, height = maxY - minY;
-        setContentSize(Size(width, height));
+        setContentSize(CC_SIZE_PIXELS_TO_POINTS(Size(width, height)));
         setAnchorPoint(Vec2(-minX / width, maxY / height));
 
         // correct the points data
         for (int i = 0; i < idx; i++) {
-            points[i] = Vec2(points[i].x - minX, -points[i].y + maxY);
+            points[i] = CC_POINT_PIXELS_TO_POINTS(Vec2(points[i].x - minX, -points[i].y + maxY));
         }
         drawPoly(points, idx, isPolygon, _groupColor);
-        delete [] points;
     } else {
+        Vec2 bl = _getPosByOffset(Vec2(minX, maxY));
+        Vec2 tr = _getPosByOffset(Vec2(maxX, minY));
+        Vec2 origin = _getPosByOffset(Vec2(0 ,0));
+        float width = tr.x - bl.x, height = tr.y - bl.y;
+        setContentSize(Size(width, height));
+        setAnchorPoint(Vec2((origin.x - bl.x) / width, (origin.y - bl.y) / height));
         
+        // correct the points data
+        for (int i = 0; i < idx; i++) {
+            Vec2 tempPoint = _getPosByOffset(points[i]);
+            points[i] = Vec2(tempPoint.x - bl.x, tempPoint.y - bl.y);
+        }
+        drawPoly(points, idx, isPolygon, _groupColor);
     }
+    delete [] points;
 }
 
 //implementation TMXObjectGroup
