@@ -31,35 +31,13 @@ LOCAL_SRC_FILES :=      ../animation/Animation.cpp \
                         ../cocos2dx/CCTextureData.cpp
 
 
-LOCAL_C_INCLUDES :=     $(LOCAL_PATH)/../ \
-                        $(LOCAL_PATH)/../animation \
-                        $(LOCAL_PATH)/../armature \
-                        $(LOCAL_PATH)/../core \
-                        $(LOCAL_PATH)/../events \
-                        $(LOCAL_PATH)/../factories \
-                        $(LOCAL_PATH)/../geom \
-                        $(LOCAL_PATH)/../model \
-                        $(LOCAL_PATH)/../parsers \
-                        $(LOCAL_PATH)/../cocos2dx \
-                        $(LOCAL_PATH)/../textures \
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/../..
 
-LOCAL_EXPORT_C_INCLUDES :=     $(LOCAL_PATH)/../ \
-                        $(LOCAL_PATH)/../animation \
-                        $(LOCAL_PATH)/../armature \
-                        $(LOCAL_PATH)/../core \
-                        $(LOCAL_PATH)/../events \
-                        $(LOCAL_PATH)/../factories \
-                        $(LOCAL_PATH)/../geom \
-                        $(LOCAL_PATH)/../model \
-                        $(LOCAL_PATH)/../parsers \
-                        $(LOCAL_PATH)/../cocos2dx \
-                        $(LOCAL_PATH)/../textures \
+LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/../..
 
-LOCAL_WHOLE_STATIC_LIBRARIES += cocos2dx_static
+LOCAL_STATIC_LIBRARIES := cocos2dx_internal_static
 
 LOCAL_CFLAGS += -Wno-psabi
 LOCAL_EXPORT_CFLAGS += -Wno-psabi
 
 include $(BUILD_STATIC_LIBRARY)
-
-$(call import-module,.)

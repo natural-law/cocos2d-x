@@ -49,6 +49,12 @@ LOCAL_SRC_FILES := main.cpp \
 ../../../Classes/CurrentLanguageTest/CurrentLanguageTest.cpp \
 ../../../Classes/DataVisitorTest/DataVisitorTest.cpp \
 ../../../Classes/DownloaderTest/DownloaderTest.cpp \
+../../../Classes/DragonBonesTest/AnimationBaseTest.cpp \
+../../../Classes/DragonBonesTest/CoreElement.cpp \
+../../../Classes/DragonBonesTest/DragonBonesTest.cpp \
+../../../Classes/DragonBonesTest/HelloDragonBones.cpp \
+../../../Classes/DragonBonesTest/Knight.cpp \
+../../../Classes/DragonBonesTest/PerformanceTest.cpp \
 ../../../Classes/DrawPrimitivesTest/DrawPrimitivesTest.cpp \
 ../../../Classes/EffectsAdvancedTest/EffectsAdvancedTest.cpp \
 ../../../Classes/EffectsTest/EffectsTest.cpp \
