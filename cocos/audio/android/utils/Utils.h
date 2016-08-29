@@ -1,6 +1,5 @@
 /****************************************************************************
-Copyright (c) 2011      Laschweinski
-Copyright (c) 2013-2016 Chukong Technologies Inc.
+Copyright (c) 2016 Chukong Technologies Inc.
 
 http://www.cocos2d-x.org
 
@@ -22,46 +21,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef __CC_FILEUTILS_LINUX_H__
-#define __CC_FILEUTILS_LINUX_H__
 
-#include "platform/CCPlatformConfig.h"
-#if CC_TARGET_PLATFORM == CC_PLATFORM_LINUX
-
-#include "platform/CCFileUtils.h"
-#include "platform/CCPlatformMacros.h"
-#include "base/ccTypes.h"
 #include <string>
-#include <vector>
 
-NS_CC_BEGIN
-
-/**
- * @addtogroup platform
- * @{
- */
-
-//! @brief  Helper class to handle file operations
-class CC_DLL FileUtilsLinux : public FileUtils
-{
-    friend class FileUtils;
-protected:
-    FileUtilsLinux();
-private:
-    std::string _writablePath;
-public:
-    /* override functions */
-    bool init() override;
-    virtual std::string getWritablePath() const override;
-private:
-    virtual bool isFileExistInternal(const std::string& strFilePath) const override;
-};
-
-// end of platform group
-/// @}
-
-NS_CC_END
-
-#endif // CC_TARGET_PLATFORM == CC_PLATFORM_LINUX
-
-#endif    // __CC_FILEUTILS_LINUX_H__
+namespace cocos2d { namespace experimental {
+	extern int getSystemProperty(const std::string& property);
+}}
