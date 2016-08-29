@@ -38,6 +38,7 @@
 #include "CurrentLanguageTest/CurrentLanguageTest.h"
 #include "DataVisitorTest/DataVisitorTest.h"
 #include "DownloaderTest/DownloaderTest.h"
+#include "DragonBonesTest/DragonBonesTest.h"
 #include "DrawPrimitivesTest/DrawPrimitivesTest.h"
 #include "EffectsAdvancedTest/EffectsAdvancedTest.h"
 #include "EffectsTest/EffectsTest.h"

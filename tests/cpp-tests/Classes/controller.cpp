@@ -42,6 +42,7 @@ public:
 #endif
         addTest("Current Language", []() { return new CurrentLanguageTests(); });
         addTest("Downloader Test", []() { return new DownloaderTests(); });
+        addTest("DragonBones Test", []() { return new DragonBonesTests(); });
         addTest("EventDispatcher", []() { return new EventDispatcherTests(); });
         addTest("Effects - Advanced", []() { return new EffectAdvanceTests(); });
         addTest("Effects - Basic", [](){return new EffectTests(); });
