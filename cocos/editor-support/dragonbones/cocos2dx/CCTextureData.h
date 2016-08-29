@@ -1,7 +1,7 @@
 #ifndef DRAGONBONES_CC_TEXTURE_DATA_H
 #define DRAGONBONES_CC_TEXTURE_DATA_H
 
-#include "dragonBones/DragonBonesHeaders.h"
+#include "dragonbones/DragonBonesHeaders.h"
 #include "cocos2d.h"
 
 DRAGONBONES_NAMESPACE_BEGIN
